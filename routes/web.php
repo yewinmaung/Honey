@@ -18,6 +18,7 @@ Route::get('/', function () {
 })->name("home");
 
 //Admin
+
 Route::get("admin/dashboard",[\App\Http\Controllers\AdminPanelController::class,'index'])->name("dashboard");
 Route::get('admin/upload',[\App\Http\Controllers\AdminPanelController::class,'create'])->name('admin-upload');
 Route::post('admin/apply',[\App\Http\Controllers\AdminPanelController::class,'store'])->name('admin-apply');
@@ -26,10 +27,13 @@ Route::get('admin/report',[\App\Http\Controllers\AdminPanelController::class,'re
 
 Route::get('admin/staffInformation',[\App\Http\Controllers\AdminPanelController::class,'show'])->name('admin-staff');
 Route::get('admin/staffinformation/{id}',[\App\Http\Controllers\AdminPanelController::class,'edit'])->name('staff-detail');
+Route::put('admin/staff/update/{id}',[\App\Http\Controllers\AdminPanelController::class,'update'])->name('staff-update');
 Route::delete('admin/staffinformation/delete/{id}',[\App\Http\Controllers\AdminPanelController::class,'destroy'])->name('staff-delete');
 
-Route::get('admin/bookUser',[\App\Http\Controllers\AdminPanelController::class,'bookingUser'])->name('book-user');
 Route::get("admin/message-detail/{id}",[\App\Http\Controllers\AdminPanelController::class,'reportdetail'])->name('admin-message');
+
+Route::get('admin/bookUser',[\App\Http\Controllers\AdminPanelController::class,'bookingUser'])->name('book-user');
+Route::post('admin/search',[\App\Http\Controllers\ChartController::class,'search'])->name('admin-actionsearch');
 //EndAdmin
 //Authentication
 Route::get('homeView',[\App\Http\Controllers\CustonAuthController::class,'homeView'])->name('homeView');

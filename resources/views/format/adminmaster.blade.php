@@ -31,7 +31,7 @@
 
 <section class="">
     <div class="container-fluid">
-        <div class="row g-0 ">
+        <div class="row g-0" style="height: 700px;">
             <nav class="col-2 bg-light p-0 m-0">
                 <h1 class="h4 py-3 text-center bg-custom">
         <span class="d-none d-lg-inline">
@@ -49,8 +49,8 @@
                     <a href="{{route('book-user')}}" class="list-group-item list-group-item-action">
                         <i class="fa fa-users text-custom"></i>
                         <span class="d-none d-lg-inline">Booking Users</span>
-                        <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">20</span>
-                    </a>
+                       @yield('bookU')
+                        </a>
 
 
                     <a href="{{route('admin-staff')}}" class="list-group-item list-group-item-action">
@@ -106,6 +106,7 @@
             </main>
         </div>
     </div>
+
 </section>
 
 <script src="{{asset('data/js/jquery-3.0.0.min.js')}}"></script>

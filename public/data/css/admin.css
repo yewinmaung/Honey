@@ -16,3 +16,12 @@ body{
 .text-custom1{
     color: #f9c901;
 }
+.btn-cus-col{
+    background-color: #f9c901;
+    color: #6b4701;
+}
+.btn-cus-col:hover{
+
+    background-color: #6b4701;
+    color:#f9c901;
+}

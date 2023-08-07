@@ -68,10 +68,10 @@
                                     <div class="col-6 pb-3">
                                         <select class="custom-select @error("trip") is-invalid @enderror" name="trip" >
                                             <option selected disabled >Select Trip</option>
-                                            <option class="cus-select"  value="bagan">Bagan </option>
-                                            <option class="cus-select" value="dawei">Dawei</option>
-                                            <option class="cus-select" value="ngapali">NgaPali</option>
-                                            <option class="cus-select" value="myitkyina">MyitKyiNa</option>
+                                            <option class="cus-select"  value="Bagan">Bagan </option>
+                                            <option class="cus-select" value="Dawei">Dawei</option>
+                                            <option class="cus-select" value="NgaPali">NgaPali</option>
+                                            <option class="cus-select" value="MyitKyiNa">MyitKyiNa</option>
                                         </select>
 
                                         @error("trip")

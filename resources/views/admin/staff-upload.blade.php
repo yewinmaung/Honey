@@ -1,4 +1,10 @@
 @extends('format.adminmaster')
+@section('title')
+    Add Staff
+@endsection
+@section('bookU')
+    <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
+@endsection
 @section('content')
 <div class="d-flex justify-content-center align-items-center mt-3">
   <div class="card w-75  bg-custom">
@@ -91,8 +97,8 @@
           </div>
         </div>
         <div class="row d-flex justify-content-end py-3 btn-group">
-            <button type="reset" class="btn btn-danger">Cancel</button>
-          <button type="submit" class="btn btn-warning">UpLoad</button>
+            <button type="reset" class="read-more">Cancel</button>
+          <button type="submit" class="read-more">UpLoad</button>
         </div>
       </form>
     </div>

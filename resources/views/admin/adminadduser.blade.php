@@ -1,4 +1,10 @@
 @extends('format.adminmaster')
+@section("title")
+    Add Booking
+@endsection
+@section('bookU')
+    <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
+@endsection
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -142,8 +148,8 @@
                                    <div class="row">
                                        <div class="col-12 traveling-box">
                                            <div class="read-more">
-                                               <button type="submit" class="read-more">Booking</button>
                                                <button type="reset" class="read-more">Cancel</button>
+                                               <button type="submit" class="read-more">Booking</button>
                                            </div>
                                        </div>
                                    </div>

@@ -2,6 +2,9 @@
 @section('title')
     Staff Infromation
 @endsection
+@section('bookU')
+    <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
+@endsection
 @section('breadcamp')
     <ol class="breadcrumb w-100">
         <li class="breadcrumb-item"><a href="{{route("dashboard")}}" class="owncol">Home</a></li>
@@ -17,7 +20,7 @@
                     <th>Photo</th>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Job</th>
+                    <th>Position</th>
                     <th>NIC</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -25,9 +28,9 @@
                 </tr>
                  @forelse($admins as $admin)
                  <tr>
-                     <td>{{$admin->id}}</td>
                      <td><img src="/images/{{ $admin->image }}" width="50px"></td>
-                     <td>{{$admin->name}}</td>
+                     <td>{{$admin->id}}</td>
+                     <td class="text-capitalize">{{$admin->name}}</td>
                      <td>{{$admin->job}}</td>
                      <td>{{$admin->nic}}</td>
                      <td>{{$admin->email}}</td>

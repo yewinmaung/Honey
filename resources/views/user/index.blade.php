@@ -30,8 +30,8 @@
                                     <td>{{$book->id}}</td>
                                     <td>{{$book->name}}</td>
                                     <td>{{$book->nic}}</td>
-                                    <td>{{$book->trip}}</td>
-                                    <td>{{$book->package}}</td>
+                                    <td class="text-capitalize">{{$book->trip}}</td>
+                                    <td class="text-capitalize">{{$book->package}}</td>
                                     <td>{{$book->date}}</td>
                                     <td>{{$book->hour}}
                                          {{$book->minute}}

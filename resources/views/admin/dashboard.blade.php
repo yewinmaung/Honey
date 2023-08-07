@@ -29,10 +29,8 @@
                         <a href="{{route('book-user')}}" class="list-group-item list-group-item-action">
                             <i class="fa fa-users text-custom"></i>
                             <span class="d-none d-lg-inline">Booking Users</span>
-                            <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">20</span>
+                            <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
                         </a>
-
-
                         <a href="{{route('admin-staff')}}" class="list-group-item list-group-item-action">
                             <i class="fa fa-line-chart text-custom"></i>
                             <span class="d-none d-lg-inline">Staff Information</span>
@@ -101,7 +99,7 @@
                                             </div>
                                             <div class="col-9">
                                                 <p class="mb-1 h4 font-weight-bolder">
-                                                    <span class="counter-up text-col1">200</span>
+                                                    <span class="counter-up text-col1">{{$IU}}</span>
                                                 </p>
                                                 <p class="mb-0 text-col1-50">Interest Users</p>
                                             </div>
@@ -118,7 +116,7 @@
                                             </div>
                                             <div class="col-9">
                                                 <p class="mb-1 h4 font-weight-bolder">
-                                                    <span class="counter-up text-col1">120</span>
+                                                    <span class="counter-up text-col1">{{$bookU}}</span>
                                                 </p>
                                                 <p class="mb-0 text-col1-50">Booking users</p>
                                             </div>
@@ -135,7 +133,7 @@
                                             </div>
                                             <div class="col-9">
                                                 <p class="mb-1 h4 font-weight-bolder">
-                                                    <span class="counter-up text-col1">50</span>
+                                                    <span class="counter-up text-col1">{{$admin_count}}</span>
                                                 </p>
                                                 <p class="mb-0 text-col1-50">Staff</p>
                                             </div>
@@ -153,8 +151,12 @@
                                             <div class="col-9">
                                                 <p class="mb-1 h4 font-weight-bolder">
                                                     <span class="counter-up text-col1">4</span>
+
                                                 </p>
-                                                <p class="mb-0 text-col1-50">Location</p>
+                                                <p class="mb-0 text-col1-50">Location
+                                                    <a href="#" class="">Detail</a>
+                                                </p>
+
                                             </div>
                                         </div>
                                     </div>
@@ -176,24 +178,21 @@
                                 <h1 class="text-custom1">Staff Infromation</h1>
                                         <table class="table bg-white">
                                             <tr>
-                                                <th>#</th>
+                                                <th>ID</th>
                                                 <th>Name</th>
-                                                <th>Phone</th>
+                                                <th>Position</th>
                                                 <th>E-mail</th>
-                                                <th>Detail</th>
+                                                <th>Phone</th>
+
+
                                             </tr>
                                             @foreach($admins as $admin)
                                             <tr>
-
                                                 <td>{{$admin->id}}</td>
-
-                                                <td>{{$admin->name}}</td>
-                                                <td>{{$admin->phone}}</td>
+                                                <td style="text-transform: capitalize;">{{$admin->name}}</td>
+                                                <td>{{$admin->job}}</td>
                                                 <td>{{$admin->email}}</td>
-
-                                                <td>
-                                                   {{$admin->job}}
-                                                 </td>
+                                                <td>{{$admin->phone}}</td>
                                             </tr>
                                             @endforeach
                                         </table>
