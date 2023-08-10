@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
 use App\Models\Book;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-class BookController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -25,7 +22,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view("user.booking");
+        //
     }
 
     /**
@@ -34,23 +31,47 @@ class BookController extends Controller
     public function store(Request $request)
     {
 
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {   $book=Book::findorfail($id);
+
+        $bookU=Book::count();
+       return view('admin.bookingUpdate',compact('bookU','book'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request,$id)
+    {
         $request->validate([
             "name"=>"required",
-            "nic"=>"required|unique:books,nic",
-            "email"=>"required|unique:books,email",
+            "nic"=>"required|unique:books,nic,$id",
+            "email"=>"required|unique:books,email,$id",
             "nop"=>"required",
-           "trip"=>"required",
+            "trip"=>"required",
             "package"=>"required",
             "phone"=>"required|gte:14",
             "date"=>"required",
             "hour"=>"required",
             "dp"=>"required",
-            "minute"=>"required"
+            "minute"=>"required",
+            "paym"=>"required",
 
         ]);
-
-
-        $book=new Book();
+        $book=Book::findorfail($id);
         $book->name=$request->name;
         $book->nic=$request->nic;
         $book->email=$request->email;
@@ -62,50 +83,17 @@ class BookController extends Controller
         $book->trip=$request->trip;
         $book->package=$request->package;
         $book->phone=$request->phone;
+        $book->isclear=$request->paym;
         $book->users_id=Auth::user()->id;
-        $book->save();
-        return redirect()->route('user.ticket');
-
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        $id=Auth::user()->id;
-        $users=DB::select('select * from users,books where users.id=books.users_id and users.id=:id',['id'=>$id]);
-      return view('user.index',['books'=>$users]);
-
-
-//        dd($id);
-
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Book $book)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Book $book)
-    {
-        //
+        $book->update();
+        return redirect()->route('book-user');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-      $book=Book::findorfail($id);
-      $book->delete();
-      return redirect()->back();
+        //
     }
 }

@@ -20,8 +20,7 @@
                                 <td>Package</td>
                                 <td>Start Date</td>
                                 <td>Start Time</td>
-                                <td>Controls</td>
-                                <td>Note</td>
+                                <td>Payment</td>
                             </tr>
                             </thead>
                             <tbody>
@@ -38,12 +37,20 @@
                                          {{$book->am_or_pm}}
                                     </td>
 
-                                    <td>
-                                        <form action="{{route("book.cancel",$book->id)}}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn-sm btn btn-outline-danger">Cancel</button>
-                                        </form>
+                                    <td class="d-flex">
+                                        @if($book->isclear=='0')
+                                            <label class="border bg-warning text-dark px-3 py-2 mx-1">UnPaid</label>
+                                            <div class="">
+                                                <form action="{{route("book.cancel",$book->id)}}" method="post" class="form-inline my-0">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="p-2 m-0  btn-sm btn btn-outline-danger">Cancel</button>
+                                                </form>
+                                            </div>
+                                        @elseif($book->isclear=='1')
+                                            <label class="border bg-warning text-dark px-3 py-1">Paid</label>
+
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

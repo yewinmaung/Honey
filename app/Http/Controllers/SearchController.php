@@ -6,9 +6,10 @@ use App\Models\Admin;
 use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ChartController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,9 +46,9 @@ class ChartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+
     }
 
     /**

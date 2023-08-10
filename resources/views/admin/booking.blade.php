@@ -16,7 +16,7 @@
                 <form method="post" action="{{route("admin-actionsearch")}}" class="form-inline">
                     @csrf
                     <div class="input-group pb-1">
-                        <input type="search" name="search" class="mx-1">
+                        <input type="search" name="search" class="mx-1" placeholder="Searching With NIC">
                         <button class="btn btn-cus-col m-0 p-2" type="submit">Submit</button>
                     </div>
                 </form>
@@ -31,6 +31,7 @@
                     <th>Package</th>
                     <th>Date</th>
                     <th>Time</th>
+                    <th>Note</th>
                 </tr>
 
                 @forelse($books as $book)
@@ -46,7 +47,21 @@
                             {{$book->minute}}
                             {{$book->am_or_pm}}
                         </td>
+                         <td class="d-flex">
+                             @if($book->isclear=='0')
+                                 <a href="{{route('done',$book->id)}}" class="btn btn-warning d-inline-block mx-1">UnPaid</a>
+                                <div class="">
+                                    <form action="{{route("book.cancel",$book->id)}}" method="post" class="form-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="p-2 m-0  btn-sm btn btn-outline-danger">Cancel</button>
+                                    </form>
+                                </div>
+                                 @elseif($book->isclear=='1')
+                                 <a href="{{route('done',$book->id)}}" class="btn btn-warning">Paid</a>
 
+                             @endif
+                         </td>
                     </tr>
                 @empty
                     <tr>

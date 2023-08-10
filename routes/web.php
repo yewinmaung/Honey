@@ -18,7 +18,10 @@ Route::get('/', function () {
 })->name("home");
 
 //Admin
-
+//Admin_AUth
+Route::get('admin/login',[\App\Http\Controllers\AdminAuthController::class,'index'])->name("admin-login");
+Route::post('admin/cus-login',[\App\Http\Controllers\AdminAuthController::class,'customLogin']);
+//endAdmin_Auth
 Route::get("admin/dashboard",[\App\Http\Controllers\AdminPanelController::class,'index'])->name("dashboard");
 Route::get('admin/upload',[\App\Http\Controllers\AdminPanelController::class,'create'])->name('admin-upload');
 Route::post('admin/apply',[\App\Http\Controllers\AdminPanelController::class,'store'])->name('admin-apply');
@@ -33,7 +36,9 @@ Route::delete('admin/staffinformation/delete/{id}',[\App\Http\Controllers\AdminP
 Route::get("admin/message-detail/{id}",[\App\Http\Controllers\AdminPanelController::class,'reportdetail'])->name('admin-message');
 
 Route::get('admin/bookUser',[\App\Http\Controllers\AdminPanelController::class,'bookingUser'])->name('book-user');
-Route::post('admin/search',[\App\Http\Controllers\ChartController::class,'search'])->name('admin-actionsearch');
+Route::post('admin/search',[\App\Http\Controllers\SearchController::class,'search'])->name('admin-actionsearch');
+Route::get('admin/done/{id}',[\App\Http\Controllers\PaymentController::class,'edit'])->name('done');
+Route::put('admin/done/{id}',[\App\Http\Controllers\PaymentController::class,'update'])->name('book-done');
 //EndAdmin
 //Authentication
 Route::get('homeView',[\App\Http\Controllers\CustonAuthController::class,'homeView'])->name('homeView');
@@ -43,6 +48,8 @@ Route::get('registration',[\App\Http\Controllers\CustonAuthController::class,'Re
 Route::post('cus-registration',[\App\Http\Controllers\CustonAuthController::class,'cusRegistration'])->name('cus-registration');
 Route::get('signout',[\App\Http\Controllers\CustonAuthController::class,'signout'])->name('signout');
 
+Route::get('admin/login',[\App\Http\Controllers\AdminAuthController::class,"index"])->name("admin-login");
+Route::post('admin/cus-login',[\App\Http\Controllers\AdminAuthController::class,'customLogin'])->name("admin-cus-login");
 //end Authentication
 Route::post("user/booking",[\App\Http\Controllers\BookController::class,"store"])->name("user.store");
 Route::get("user/booknow",[\App\Http\Controllers\BookController::class,"create"])->name("user.booknow");

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->String("hour");
             $table->string("minute");
             $table->string("am_or_pm");
+            $table->string('isclear')->default('0');
             $table->foreignId('users_id');
             $table->timestamps();
         });
