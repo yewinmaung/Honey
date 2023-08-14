@@ -15,16 +15,21 @@ class AdminAuthController extends Controller
         return view("adminauth.login");
     }
     public function customLogin(Request $request){
+
         $request->validate([
             'email'=>"required",
             'password'=>"required"
         ]);
-        $credential=$request->only('email','password');
-        if(Auth::attempt($credential)){
-            return redirect()->route("dashboard")->withSuccess("Sigin");
-        }
-        else{
-            return redirect('admin-login')->withSuccess("Login details are not valid");
+
+
+        if(Auth::attempt(['email' => $request->input('email'),  'password' => $request->input('password')])){
+            $user = auth()->guard('admin')->user();
+
+            if($user->type == 'admin'){
+                return redirect()->route('dashboard')->with('success','You are Logged in sucessfully.');
+            }
+        }else {
+            return back()->with('error','Whoops! invalid email and password.');
         }
     }
 
@@ -60,8 +65,9 @@ class AdminAuthController extends Controller
         }
     }
     public function signout(){
+        auth()->guard('admin')->logout();
         Session::flush();
-        Auth::logout();
-        return redirect()->route('home');
+        Session::put('success', 'You are logout sucessfully');
+        return redirect(route('admin-login'));
     }
 }
