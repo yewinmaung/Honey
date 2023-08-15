@@ -42,11 +42,11 @@ class AdminAuthController extends Controller
            }
            else
            {
-               return redirect()->route('admin-login')->withSuccess("Login details are not valid");
+               return redirect()->route('admin-login')->withSuccess("Your account is invalid");
            }
                }
        else {
-               return redirect()->route('admin-login')->withSuccess("Login details are not valid");
+               return redirect()->route('admin-login')->withSuccess("Your account is invalid");
            }
 
     }

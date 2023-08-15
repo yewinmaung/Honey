@@ -19,14 +19,16 @@ class AdminPanelController extends Controller
      */
     public function index()
     {
-        $admins=Admin::all();
+        $admins=Admin::paginate(5);
         $admin_count=Admin::count();
         $bookU=Book::count();
         $IU=User::count();
+        $rep=Message::count();
         $aut=Auth::user()->id;
         $users=User::findorfail($aut);
         $use=$users->type;
-         return view('admin.dashboard',compact("use",'admins','admin_count','IU',"bookU"));
+
+         return view('admin.dashboard',compact('rep',"use",'admins','admin_count','IU',"bookU"));
     }
 
     /**
@@ -93,7 +95,7 @@ class AdminPanelController extends Controller
         $users=User::findorfail($aut);
         $use=$users->type;
         $bookU=Book::count();
-       return view('admin.staff',['admins'=>Admin::all()],compact('bookU','use'));
+       return view('admin.staff',['admins'=>Admin::paginate(5)],compact('bookU','use'));
     }
 
     /**
@@ -185,7 +187,7 @@ class AdminPanelController extends Controller
         $aut=Auth::user()->id;
         $users=User::findorfail($aut);
         $use=$users->type;
-        $books=Book::all();
+        $books=Book::paginate(5);
         $bookU=Book::count();
         return view('admin.booking',compact('books','bookU','use'));
     }
@@ -219,7 +221,6 @@ public function adminbooking(Request $request){
     $book->package=$request->package;
     $book->phone=$request->phone;
     $book->admins_id=Auth::user()->id;
-
     $book->save();
     $aut=Auth::user()->id;
     $users=User::findorfail($aut);

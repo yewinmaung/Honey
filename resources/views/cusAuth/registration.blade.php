@@ -40,25 +40,25 @@
                                   <form action="{{ route('cus-registration') }}" method="POST">
                                       @csrf
                                       <div class="form-group mb-3">
-                                          <input type="text" placeholder="Name" id="name" class="form-control" name="name"
+                                          <input type="text" placeholder="Name" id="name" class="form-control @error("email") is-invalid @enderror" name="name"
                                                  required autofocus>
-                                          @if ($errors->has('name'))
-                                              <span class="text-danger">{{ $errors->first('name') }}</span>
-                                          @endif
+                                          @error("name")
+                                          <div class="text-danger invalid-feedback">{{$message}}</div>
+                                          @enderror
                                       </div>
                                       <div class="form-group mb-3">
-                                          <input type="text" placeholder="Email" id="email_address" class="form-control"
+                                          <input type="email" placeholder="Email" id="email_address" class="form-control @error("email") is-invalid @enderror"
                                                  name="email" required autofocus>
-                                          @if ($errors->has('email'))
-                                              <span class="text-danger">{{ $errors->first('email') }}</span>
-                                          @endif
+                                          @error("email")
+                                          <div class="text-danger invalid-feedback">{{$message}}</div>
+                                          @enderror
                                       </div>
                                       <div class="form-group mb-3">
-                                          <input type="password" placeholder="Password" id="password" class="form-control"
+                                          <input type="password" placeholder="Password" id="password" class="form-control @error("password") is-invalid @enderror"
                                                  name="password" required>
-                                          @if ($errors->has('password'))
-                                              <span class="text-danger">{{ $errors->first('password') }}</span>
-                                          @endif
+                                          @error("password")
+                                          <div class="text-danger invalid-feedback">{{$message}}</div>
+                                          @enderror
                                       </div>
                                       <div class="form-group mb-3">
                                           <div class="checkbox">

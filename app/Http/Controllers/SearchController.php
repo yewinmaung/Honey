@@ -53,6 +53,7 @@ class SearchController extends Controller
            if($request){
                $search_text=$request->search;
                $admins=Admin::where('nic','Like',"%".$search_text."%")->get();
+
                return view('admin.staff',compact('admins',"bookU",'use'))->with("Found");
            }
            else{

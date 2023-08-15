@@ -26,7 +26,7 @@ class CustonAuthController extends Controller
             return redirect()->route("home")->withSuccess("Sigin");
         }
         else{
-            return redirect('login')->withSuccess("Login details are not valid");
+            return redirect('login')->withSuccess("Your account invalid");
         }
     }
 

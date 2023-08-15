@@ -37,7 +37,8 @@
                     <th>Date</th>
                     <th>Time</th>
                     @if($use=='1'||$use=='2')
-                    <th>Service</th>
+                    <th>Payment</th>
+                        <th>Service By</th>
                     @endif
                 </tr>
 
@@ -67,12 +68,16 @@
                                 </div>
                                  @elseif($book->isclear=='1')
                                  <a href="{{route('done',$book->id)}}" class="btn btn-warning">Paid</a>
-                                 <p class="mx-2">Service By </p><i class="border bg-warning text-dark px-3 py-1">{{$book->admins_name}}</i>
-                             @endif
+                                 @endif
                          </td>
-
+                            @if($book->isclear=='1')
+                                <td><p class="border bg-warning text-dark px-3 py-1">{{$book->admins_name}}</p>
+                                    <small class="border bg-warning text-dark px-3 py-1">{{$book->updated_at}}</small>
+                                </td>
+                        @endif
                         @endif
                     </tr>
+
                 @empty
                     <tr>
                         <div class="card border-danger">
@@ -84,6 +89,7 @@
                 @endforelse
 
             </table>
+            {{$books->links()}}
         </div>
 
     </div>

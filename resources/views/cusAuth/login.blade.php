@@ -37,17 +37,24 @@
           <img src="{{asset('data/images/1x/honey_logo-3.png')}}" class="card-img-top bg-custom" alt="...">
           <div class="card-body">
             <h5 class="text-warning">Login</h5>
+              @if (session('success'))
+
+                  <div class="alert alert-danger" role="alert">
+                      {{session('success')}}
+                  </div>
+
+              @endif
             <form action="{{"cus-login"}}" method="post" class="">
                 @csrf
                 <div class="form-group mb-3">
-                    <input type="text" placeholder="Email" id="email" class="form-control" name="email" required
+                    <input type="text" placeholder="Email" id="email" class="form-control @error("email") is-invalid @enderror" name="email"
                            autofocus>
-                    @if ($errors->has('email'))
-                        <span class="text-danger">{{ $errors->first('email') }}</span>
-                    @endif
+                    @error("email")
+                    <div class="text-danger invalid-feedback">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="form-group mb-3">
-                    <input type="password" placeholder="Password" id="password" class="form-control" name="password" required>
+                    <input type="password" placeholder="Password" id="password" class="form-control" name="password" >
                     @if ($errors->has('password'))
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     @endif

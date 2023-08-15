@@ -81,17 +81,17 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-5">
+                    <h1 class="text-custom1">Indicator</h1>
                     <div class="card">
-                        <div class="card-header">
-                            Interested And Book
-                        </div>
                         <div class="card-body">
-                            <canvas id="myChart" width="300" height="200"></canvas>
+                            <div>
+                                <canvas id="myChart" width="100px"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-7">
                     <h1 class="text-custom1">Staff Infromation</h1>
                     <table class="table bg-white">
                         <tr>
@@ -113,81 +113,42 @@
                             </tr>
                         @endforeach
                     </table>
+                    {{$admins->links()}}
                 </div>
 
             </div>
         </div>
 
         <script src="{{asset('data/js/Chart.min.js')}}"></script>
-
-
         <script>
-            //Chart Js
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June','July','Aug','Sep','Oct','Nov','Dec'],
-                    datasets: [
-                        {
-                            label: 'Interested',
-                            data: [1, 19, 3, 5, 2, 3,1, 19, 3, 5, 2, 3],
-                            backgroundColor: [
+            const ctx = document.getElementById('myChart');
 
-                                'rgba(107,71,1,0.55)',
-
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1,
-                            lineTension: 0
-                        },
-                        {
-                            label: 'Booking',
-                            data: [4, 8, 7, 9, 3, 3,4, 8, 7, 9, 3, 3],
-                            backgroundColor: [
-
-                                'rgba(249,201,1,0.69)',
-
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1,
-                            lineTension: 0
-                        }
-                    ]
+            new Chart(ctx, {
+                type: 'pie',
+                data:{
+                    labels: [
+                        'Booking',
+                        'Users',
+                        'Staff',
+                        'Report'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [300, 50, 100,600],
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)',
+                            'rgb(133,98,1)'
+                        ],
+                        hoverOffset: 4
+                    }]
                 },
                 options: {
                     scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
             });

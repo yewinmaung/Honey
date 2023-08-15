@@ -77,6 +77,9 @@
                     </tr>
                  @endforelse
              </table>
+
+               {{$admins->links()}}
+
         </div>
     </div>
 @endsection
