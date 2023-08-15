@@ -1,16 +1,17 @@
-@extends('format.master')
-
+@extends('format.adminmaster')
+@section('title')
+    Staff Account
+@endsection
 @section('content')
-    <div class="" style="margin-top: 145px!important;">
 
           <main class="signup-form">
-              <div class="cotainer">
+              <div class="container">
                   <div class="row justify-content-center">
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                           <div class="card">
-                              <h3 class="card-header text-center">Register User</h3>
+                              <h3 class="card-header text-center">Create Staff Account</h3>
                               <div class="card-body">
-                                  <form action="{{ route('admin-cus-registration') }}" method="POST">
+                                  <form action="{{ route('staff-cus-reg') }}" method="POST">
                                       @csrf
                                       <div class="form-group mb-3">
                                           <input type="text" placeholder="Name" id="name" class="form-control" name="name"
@@ -33,10 +34,19 @@
                                               <span class="text-danger">{{ $errors->first('password') }}</span>
                                           @endif
                                       </div>
-                                      <div class="form-group mb-3">
-                                          <div class="checkbox">
-                                              <label><input type="checkbox" name="remember"> Remember Me</label>
-                                          </div>
+                                      <div class="col-md-4 form-group">
+                                          <label  class="form-label text-custom">Role</label>
+                                          <select class="custom-select @error("type") is-invalid @enderror" name="type" >
+                                              <option selected disabled >Position</option>
+                                              <option class="cus-select" value="1">Manager</option>
+                                              <option class="cus-select"  value="2">customer_Service</option>
+                                              <option class="cus-select" value="3">Driver</option>
+
+                                          </select>
+
+                                          @error("job")
+                                          <div class="text-danger invalid-feedback">{{$message}}</div>
+                                          @enderror
                                       </div>
                                       <div class="d-grid mx-auto">
                                           <button type="submit" class="btn btn-warning btn-block">Sign up</button>

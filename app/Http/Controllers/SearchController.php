@@ -33,14 +33,31 @@ class SearchController extends Controller
     }
     public function search(Request $request){
         $bookU=Book::count();
+        $aut=Auth::user()->id;
+        $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
+        $use=$users->type;
          if($request){
              $search_text=$request->search;
              $books=Book::where('nic','Like',"%".$search_text."%")->get();
-             return view('admin.booking',compact('books',"bookU"))->with("Found");
+             return view('admin.booking',compact('books',"bookU",'use'))->with("Found");
          }
          else{
-             return view('admin.booking',['books'=>Book::all()],compact("bookU"));
+             return view('admin.booking',['books'=>Book::all()],compact("bookU",'use'));
          }
+       }
+       public function staffsearch(Request $request){
+           $bookU=Book::count();
+           $aut=Auth::user()->id;
+           $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
+           $use=$users->type;
+           if($request){
+               $search_text=$request->search;
+               $admins=Admin::where('nic','Like',"%".$search_text."%")->get();
+               return view('admin.staff',compact('admins',"bookU",'use'))->with("Found");
+           }
+           else{
+               return view('admin.staff',['books'=>Admin::all()],compact("bookU",'use'));
+           }
        }
 
     /**

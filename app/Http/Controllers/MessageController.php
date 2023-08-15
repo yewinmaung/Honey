@@ -28,13 +28,14 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
+
         $complain=new Message();
         $complain->cname=$request->cname;
         $complain->cemail=$request->cemail;
         $complain->cmessage=$request->cmessage;
         $complain->save();
         return redirect()->back();
-        //
+
     }
 
     /**

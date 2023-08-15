@@ -6,8 +6,10 @@ use App\Models\Admin;
 
 use App\Models\Book;
 use App\Models\Message;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class AdminPanelController extends Controller
@@ -21,30 +23,35 @@ class AdminPanelController extends Controller
         $admin_count=Admin::count();
         $bookU=Book::count();
         $IU=User::count();
-
-        return view('admin.dashboard',compact('admins','admin_count','IU',"bookU"));
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
+         return view('admin.dashboard',compact("use",'admins','admin_count','IU',"bookU"));
     }
-
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
         $bookU=Book::count();
-        return view('admin.staff-upload',compact('bookU'));
+        return view('admin.staff-upload',compact('bookU',"use"));
     }
 
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
 
         $request->validate([
             'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             "sname"=>"required",
+
             "snic"=>"required|unique:admins,nic",
             "semail"=>"required|unique:admins,email",
             "sphone"=>"required|unique:admins,phone",
@@ -71,6 +78,7 @@ class AdminPanelController extends Controller
               $admin->quar=$request->squar;
               $admin->desc=$request->desc;
               $admin->save();
+
               return redirect()->route('dashboard')->with('success','Product created successfully.') ;
 
 
@@ -81,18 +89,23 @@ class AdminPanelController extends Controller
      */
     public function show()
     {
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
         $bookU=Book::count();
-       return view('admin.staff',['admins'=>Admin::all()],compact('bookU'));
+       return view('admin.staff',['admins'=>Admin::all()],compact('bookU','use'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {
-         $admin=Admin::findorfail($id);
+    {  $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
 
-         return view('admin.staff-detail',compact('admin'));
+         $admin=Admin::findorfail($id);
+         return view('admin.staff-detail',compact('admin','use'));
 
     }
 
@@ -131,7 +144,11 @@ class AdminPanelController extends Controller
         $admin->quar=$request->squar;
         $admin->desc=$request->desc;
         $admin->update();
-        return redirect()->route('admin-staff')->with('success');
+
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
+        return redirect()->route('admin-staff',compact('use'))->with('success');
 
     }
 
@@ -145,21 +162,75 @@ class AdminPanelController extends Controller
       return redirect()->back();
     }
     public function upload(){
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
         $bookU=Book::count();
-        return view('admin.adminadduser',compact('bookU'));
+        return view('admin.adminadduser',compact('bookU','use'));
     }
     public function report(Message $messages){
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
         $bookU=Book::count();
-        return view('admin.report',["messages"=>Message:: all()],compact('bookU'));
+        return view('admin.report',["messages"=>Message:: all()],compact('bookU','use'));
     }
     public function reportdetail(Request $request){
-       return view('admin.reportdetail',['messages'=>Message::all()]);
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
+       return view('admin.reportdetail',['messages'=>Message::all()],compact('use'));
     }
     public function bookingUser(){
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
         $books=Book::all();
         $bookU=Book::count();
-        return view('admin.booking',compact('books','bookU'));
+        return view('admin.booking',compact('books','bookU','use'));
     }
+public function adminbooking(Request $request){
+    $request->validate([
+        "name"=>"required",
+        "nic"=>"required|unique:books,nic",
+        "email"=>"required|unique:books,email",
+        "nop"=>"required",
+        "trip"=>"required",
+        "package"=>"required",
+        "phone"=>"required|gte:14",
+        "date"=>"required",
+        "hour"=>"required",
+        "dp"=>"required",
+        "minute"=>"required"
+
+    ]);
 
 
+    $book=new Book();
+    $book->name=$request->name;
+    $book->nic=$request->nic;
+    $book->email=$request->email;
+    $book->nop=$request->nop;
+    $book->date=$request->date;
+    $book->hour=$request->hour;
+    $book->minute=$request->minute;
+    $book->am_or_pm=$request->dp;
+    $book->trip=$request->trip;
+    $book->package=$request->package;
+    $book->phone=$request->phone;
+    $book->admins_id=Auth::user()->id;
+
+    $book->save();
+    $aut=Auth::user()->id;
+    $users=User::findorfail($aut);
+    $use=$users->type;
+    return redirect()->route('book-user',compact('use'));
+
+}
+public function forAdminformat(){
+    $aut=Auth::user()->id;
+    $users=User::findorfail($aut);
+    $use=$users->type;
+    return view('format.adminmaster',compact('use'));
+}
 }

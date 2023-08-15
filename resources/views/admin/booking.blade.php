@@ -1,7 +1,12 @@
 @extends('format.adminmaster')
+@section('title')
+    Booking
+@endsection
 @section('breadcamp')
     <ol class="breadcrumb w-100">
-        <li class="breadcrumb-item"><a href="{{route('dashboard')}}" class="owncol">Home</a></li>
+        @if($use=='1')
+            <li class="breadcrumb-item"><a href="{{route('dashboard')}}" class="owncol">Home</a></li>
+        @endif
         <li class="breadcrumb-item active">Booking-Information</li>
     </ol>
 @endsection
@@ -31,7 +36,9 @@
                     <th>Package</th>
                     <th>Date</th>
                     <th>Time</th>
-                    <th>Note</th>
+                    @if($use=='1'||$use=='2')
+                    <th>Service</th>
+                    @endif
                 </tr>
 
                 @forelse($books as $book)
@@ -47,6 +54,7 @@
                             {{$book->minute}}
                             {{$book->am_or_pm}}
                         </td>
+                        @if($use=='1'||$use=='2')
                          <td class="d-flex">
                              @if($book->isclear=='0')
                                  <a href="{{route('done',$book->id)}}" class="btn btn-warning d-inline-block mx-1">UnPaid</a>
@@ -59,9 +67,11 @@
                                 </div>
                                  @elseif($book->isclear=='1')
                                  <a href="{{route('done',$book->id)}}" class="btn btn-warning">Paid</a>
-
+                                 <p class="mx-2">Service By </p><i class="border bg-warning text-dark px-3 py-1">{{$book->admins_name}}</i>
                              @endif
                          </td>
+
+                        @endif
                     </tr>
                 @empty
                     <tr>

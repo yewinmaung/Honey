@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,39 +22,62 @@ class AdminAuthController extends Controller
         ]);
 
 
-        if(Auth::attempt(['email' => $request->input('email'),  'password' => $request->input('password')])){
-            $user = auth()->guard('admin')->user();
+        $credential = $request->only('email', 'password');
 
-            if($user->type == 'admin'){
-                return redirect()->route('dashboard')->with('success','You are Logged in sucessfully.');
-            }
-        }else {
-            return back()->with('error','Whoops! invalid email and password.');
-        }
+       if (Auth::attempt($credential)) {
+           $aut=Auth::user()->id;
+           $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
+           $use=$users->type;
+           if ($use){
+               if ($use=='1'){
+                   return redirect()->route("dashboard",compact("request"))->withSuccess("Sigin");
+               }
+               elseif ($use='2'){
+                   return redirect()->route("book-user",compact("request"))->withSuccess("Sigin");
+               }
+               elseif ($use=='3'){
+                   return redirect()->route("book-user",compact("request"))->withSuccess("Sigin");
+
+               }
+           }
+           else
+           {
+               return redirect()->route('admin-login')->withSuccess("Login details are not valid");
+           }
+               }
+       else {
+               return redirect()->route('admin-login')->withSuccess("Login details are not valid");
+           }
+
     }
 
     public function Registration(){
-        return view("cusAuth.registration");
+        $aut=Auth::user()->id;
+        $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
+        $use=$users->type;
+        return view("adminauth.registration",compact('use'));
     }
     public function cusRegistration(Request $request){
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'type'=>'required'
         ]);
 
-        $data = $request->all();
-        $check = $this->create($data);
-        return redirect()->route('home');
+        $aut=Auth::user()->id;
+        $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
+        $use=$users->type;
+        $admin=new User();
+        $admin->name=$request->name;
+        $admin->email=$request->email;
+        $admin->password=$request->password;
+        $admin->type=$request->type;
+        $admin->save();
+        return redirect()->route('dashboard',compact('use'));
     }
-    public function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password'])
-        ]);
-    }
+
 
     public function homeView(){
         if(Auth::check()){
@@ -65,9 +88,8 @@ class AdminAuthController extends Controller
         }
     }
     public function signout(){
-        auth()->guard('admin')->logout();
         Session::flush();
-        Session::put('success', 'You are logout sucessfully');
-        return redirect(route('admin-login'));
+        Auth::logout();
+        return redirect()->route('admin-login');
     }
 }

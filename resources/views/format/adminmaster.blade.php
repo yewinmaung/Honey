@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{asset("data/css/style.css")}}">
     <!-- Responsive-->
     <link rel="stylesheet" href="{{asset("data/css/responsive.css")}}">
+    <link rel="stylesheet" href="{{asset("data/css/admin.css")}}">
 
 </head>
 <body>
@@ -42,38 +43,49 @@
              <span class="list-group-item disabled d-none d-lg-block">
                   <small>CONTROLS</small>
                     </span>
-                    <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-home text-custom"></i>
-                        <span class="d-none d-lg-inline">Dashboard</span>
-                    </a>
-                    <a href="{{route('book-user')}}" class="list-group-item list-group-item-action">
+                  @if($use =='1')
+                        <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action">
+                            <i class="fa fa-home text-custom"></i>
+                            <span class="d-none d-lg-inline">Dashboard</span>
+                        </a>
+                    @endif
+                     <a href="{{route('book-user')}}" class="list-group-item list-group-item-action">
                         <i class="fa fa-users text-custom"></i>
                         <span class="d-none d-lg-inline">Booking Users</span>
                        @yield('bookU')
                         </a>
-
-
                     <a href="{{route('admin-staff')}}" class="list-group-item list-group-item-action">
                         <i class="fa fa-line-chart text-custom"></i>
                         <span class="d-none d-lg-inline">Staff Information</span>
                     </a>
-                    <a href="{{route('admin-user-report')}}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-flag text-custom"></i>
-                        <span class="d-none d-lg-inline">Reports</span>
-                    </a>
+
+                    @if($use=='1')
+                        <a href="{{route('admin-user-report')}}" class="list-group-item list-group-item-action">
+                            <i class="fa fa-flag text-custom"></i>
+                            <span class="d-none d-lg-inline">Reports</span>
+                        </a>
+                    @endif
                 </div>
                 <div class="list-group mt-4 text-center text-lg-left px-3">
          <span class="list-group-item disabled d-none d-lg-block">
            <small>ACTIONS</small>
          </span>
-                    <a href="{{route('admin-user-upload')}}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-user text-custom"></i>
-                        <span class="d-none d-lg-inline">New Book User</span>
-                    </a>
-                    <a href="{{route('admin-upload')}}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-edit text-custom"></i>
-                        <span class="d-none d-lg-inline">Add New Staff</span>
-                    </a>
+                   @if($use=='1'||$use=='2')
+                        <a href="{{route('admin-user-upload')}}" class="list-group-item list-group-item-action">
+                            <i class="fa fa-user text-custom"></i>
+                            <span class="d-none d-lg-inline">New Book User</span>
+                        </a>
+                    @endif
+                @if($use =='1')
+                        <a href="{{route('admin-upload')}}" class="list-group-item list-group-item-action">
+                            <i class="fa fa-edit text-custom"></i>
+                            <span class="d-none d-lg-inline">Add New Staff</span>
+                        </a>
+                        <a href="{{route('staff-reg')}}" class="list-group-item list-group-item-action">
+                            <i class="fa fa-edit text-custom"></i>
+                            <span class="d-none d-lg-inline">Create Staff Account</span>
+                        </a>
+                    @endif
 
                 </div>
             </nav>
@@ -82,22 +94,33 @@
                     <div class="">@yield('breadcamp')</div>
                     <div class="flex-fill"></div>
                     <div class="navbar nav">
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-user-circle"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="dropdown-item">User Profile</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="dropdown-item">Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="fa fa-cog"></i></a>
-                        </li>
+                        @guest
+
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle text-custom1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                        SignIn/eSignUp
+                                    </a>
+
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item log" href="{{ route('admin-login') }}">Login</a>
+                                        <a class="dropdown-item log" href="{{ route('cus-registration') }}">Register</a>
+                                    </div>
+                                </div>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle text-custom1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                        {{\Illuminate\Support\Facades\Auth::user()->name}}
+                                    </a>
+
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item log" href="#">Profile</a>
+                                        <a class="dropdown-item log" href="{{ route('admin-logout') }}">Logout</a></div>
+                                </div>
+                            </li>
+                        @endguest
                     </div>
                 </nav>
                 <div class="container-fluid p-4">

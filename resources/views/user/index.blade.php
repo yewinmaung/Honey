@@ -4,7 +4,6 @@
 @endsection
 @include("format.nav")
 @section("content")
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-12 d-flex justify-content-center align-items-center">
@@ -13,14 +12,15 @@
                     <div class="card-body">
                         <table class="table">
                             <thead class="">
-                            <tr><td>#</td>
-                                <td>Name</td>
-                                <td>NIC</td>
-                                <td>trip</td>
-                                <td>Package</td>
-                                <td>Start Date</td>
-                                <td>Start Time</td>
-                                <td>Payment</td>
+                            <tr><th>#</th>
+                                <th>Name</th>
+                                <th>NIC</th>
+                                <th>trip</th>
+                                <th>Package</th>
+                                <th>Start Date</th>
+                                <th>Start Time</th>
+                                <th>Payment</th>
+                                <th>Service</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,7 +49,11 @@
                                             </div>
                                         @elseif($book->isclear=='1')
                                             <label class="border bg-warning text-dark px-3 py-1">Paid</label>
-
+                                          @endif
+                                    </td>
+                                    <td>
+                                        @if($book->isclear=='1')
+                                            <label class="border bg-warning text-dark px-3 py-1">{{$book->admins_name}}</label>
                                         @endif
                                     </td>
                                 </tr>

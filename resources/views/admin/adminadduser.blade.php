@@ -18,7 +18,7 @@
                                <h3 class="text-warning">Staff Requirements</h3>
                            </div>
                            <div class="card-body">
-                               <form method="post" action="{{route("user.store")}}" class="form-group border p-3 form-bg ">
+                               <form method="post" action="{{route("admin-book")}}" class="form-group border p-3 form-bg ">
 
                                    @csrf
                                    <div class="row">

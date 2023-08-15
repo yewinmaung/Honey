@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,9 +47,11 @@ class PaymentController extends Controller
      */
     public function edit(string $id)
     {   $book=Book::findorfail($id);
-
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
         $bookU=Book::count();
-       return view('admin.bookingUpdate',compact('bookU','book'));
+       return view('admin.bookingUpdate',compact('bookU','book','use'));
     }
 
     /**
@@ -84,9 +87,14 @@ class PaymentController extends Controller
         $book->package=$request->package;
         $book->phone=$request->phone;
         $book->isclear=$request->paym;
-        $book->users_id=Auth::user()->id;
+        $book->admins_id=Auth::user()->id;
+        $book->admins_name=Auth::user()->name;
         $book->update();
-        return redirect()->route('book-user');
+
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
+        return redirect()->route('book-user',compact('use'));
     }
 
     /**

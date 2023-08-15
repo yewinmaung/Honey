@@ -2,6 +2,12 @@
 @section('title')
     Reports
 @endsection
+@section('breadcamp')
+    <ol class="breadcrumb w-100">
+        <li class="breadcrumb-item"><a href="{{route("dashboard")}}" class="owncol">Home</a></li>
+        <li class="breadcrumb-item active">Report</li>
+    </ol>
+@endsection
 @section('bookU')
     <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
 @endsection

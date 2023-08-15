@@ -40,7 +40,7 @@
                                 <img src="{{asset('data/images/1x/honey_logo-3.png')}}" class="card-img-top bg-custom" alt="...">
                                 <div class="card-body">
                                     <h5 class="text-warning">Admin Login</h5>
-                                    <form action="{{"admin-cus-login"}}" method="post" class="">
+                                    <form action="{{route("admin-cuslogin")}}" method="post" class="">
                                         @csrf
                                         <div class="form-group mb-3">
                                             <input type="text" placeholder="Email" id="email" class="form-control" name="email" required
