@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class AdminPanelController extends Controller
@@ -171,6 +172,7 @@ class AdminPanelController extends Controller
         return view('admin.adminadduser',compact('bookU','use'));
     }
     public function report(Message $messages){
+
         $aut=Auth::user()->id;
         $users=User::findorfail($aut);
         $use=$users->type;
@@ -233,5 +235,49 @@ public function forAdminformat(){
     $users=User::findorfail($aut);
     $use=$users->type;
     return view('format.adminmaster',compact('use'));
+}
+public function staffAccount(){
+        $admins=DB::select('select * from `users` where type=1 or type=2 or type =3');
+
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
+
+    if($use=='1'){
+        $staffacc=User::all();
+    }
+    return view("admin.staffaccount",compact('staffacc',"use","admins"));
+
+}
+public function staffAccEdit(Request $request,$id){
+       $user=User::findorfail($id);
+
+        $aut=Auth::user()->id;
+        $users=User::findorfail($aut);
+        $use=$users->type;
+
+       return view('admin.staffaccountdetail',compact('user',"use"));
+
+
+}
+public function staffupdate(Request $request){
+        $request->validate([
+            'name'=>'required',
+            'email'=>"required",
+            "type"=>"required",
+        ]);
+        $user=User::findorfail($request->id);
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->type=$request->type;
+        $user->update();
+       return redirect()->route('staff-account');
+
+}
+public function staffAccDelete($id){
+     $user=User::findorfail($id);
+     $user->delete();
+     return redirect()->back();
+
 }
 }

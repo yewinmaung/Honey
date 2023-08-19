@@ -45,21 +45,36 @@ class SearchController extends Controller
              return view('admin.booking',['books'=>Book::all()],compact("bookU",'use'));
          }
        }
+       public function staffaccsearch(Request $request){
+           $aut=Auth::user()->id;
+           $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
+           $use=$users->type;
+
+           if($request->filled('search')){
+
+               $search_text=$request->search;
+               $admins=User::where('id','Like',"%".$search_text."%")->get();
+           }
+           else{
+               $admins=DB::select('select * from `users` where type=1 or type=2 or type =3');
+           }
+           return view('admin.staffaccount', compact('admins', 'use'));
+       }
+
        public function staffsearch(Request $request){
            $bookU=Book::count();
            $aut=Auth::user()->id;
            $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
            $use=$users->type;
-           if($request){
+           if($request->filled("search")){
                $search_text=$request->search;
-               $admins=Admin::where('nic','Like',"%".$search_text."%")->get();
-
-               return view('admin.staff',compact('admins',"bookU",'use'))->with("Found");
+               $admins=Admin::where('nic','Like',"%".$search_text."%")->paginate(3);
            }
            else{
-               return view('admin.staff',['books'=>Admin::all()],compact("bookU",'use'));
-           }
-       }
+              $admins=Admin::paginate(5);
+                }
+           return view('admin.staff',compact('admins',"bookU",'use'))->with("Found");
+    }
 
     /**
      * Store a newly created resource in storage.

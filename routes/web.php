@@ -26,7 +26,15 @@ Route::get('admin/user-upload',[\App\Http\Controllers\AdminPanelController::clas
 Route::get('admin/report',[\App\Http\Controllers\AdminPanelController::class,'report'])->name('admin-user-report');
 
 Route::get('admin/staffInformation',[\App\Http\Controllers\AdminPanelController::class,'show'])->name('admin-staff');
+Route::get('admin/staffaccount',[\App\Http\Controllers\AdminPanelController::class,'staffAccount'])->name('staff-account');
+
+Route::get("admin/staffaccount/{id}",[\App\Http\Controllers\AdminPanelController::class,"staffAccEdit"])->name('staffaccedit');
+Route::post("admin/staffaccount-update",[\App\Http\Controllers\AdminPanelController::class,'staffupdate'])->name('staffacc-update');
+Route::delete("admin/staffaccount/{id}",[\App\Http\Controllers\AdminPanelController::class,"staffAccDelete"])->name("staffaccdelete");
+
 Route::get('admin/staffinformation/{id}',[\App\Http\Controllers\AdminPanelController::class,'edit'])->name('staff-detail');
+
+
 Route::put('admin/staff/update/{id}',[\App\Http\Controllers\AdminPanelController::class,'update'])->name('staff-update');
 Route::delete('admin/staffinformation/delete/{id}',[\App\Http\Controllers\AdminPanelController::class,'destroy'])->name('staff-delete');
 
@@ -35,6 +43,7 @@ Route::post('admin/adminbook',[\App\Http\Controllers\AdminPanelController::class
 Route::get('admin/bookUser',[\App\Http\Controllers\AdminPanelController::class,'bookingUser'])->name('book-user');
 Route::post('admin/search',[\App\Http\Controllers\SearchController::class,'search'])->name('admin-actionsearch');
 Route::post('admin/staff/search',[\App\Http\Controllers\SearchController::class,'staffsearch'])->name('staff-search');
+Route::post('admin/staffacc/search',[\App\Http\Controllers\SearchController::class,'staffaccsearch'])->name('staffacc-search');
 Route::get('admin/done/{id}',[\App\Http\Controllers\PaymentController::class,'edit'])->name('done');
 Route::put('admin/done/{id}',[\App\Http\Controllers\PaymentController::class,'update'])->name('book-done');
 //EndAdmin
@@ -61,4 +70,8 @@ Route::get("honey/trip",function (){
 })->name('bagan');
 Route::post("honey/review",[\App\Http\Controllers\MessageController::class,'store'])->name('message.review');
 
-
+///////////////
+Route::get('forget-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+Route::get('reset-password/{token}', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');

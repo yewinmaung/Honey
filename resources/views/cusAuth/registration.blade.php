@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title')</title>
+    <title>Register</title>
     <link rel="stylesheet" href="{{asset('data/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('data/css/admin.css')}}">
     <link rel="stylesheet" href="{{asset('data/css/font-awesome.min.css')}}">

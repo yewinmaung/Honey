@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title')</title>
-    <link rel="stylesheet" href="{{asset('data/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('data/css/admin.css')}}">
-    <link rel="stylesheet" href="{{asset('data/css/font-awesome.min.css')}}">
+    <title>Login</title>
+
     <!-- basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,13 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>@yield("title")</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
+
     <meta name="author" content="">
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{asset("data/css/bootstrap.min.css")}}">
-
+    <link rel="stylesheet" href="{{asset('data/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('data/css/admin.css')}}">
+    <link rel="stylesheet" href="{{asset('data/css/font-awesome.min.css')}}">
     <!-- style css -->
 
     <link rel="stylesheet" href="{{asset("data/css/style.css")}}">
@@ -64,7 +62,7 @@
                 </div>
             </form>
           <div class="d-flex justify-content-between">
-              <a href="{{route('registration')}}" class="mt-2 d-flex justify-content-center">forget-password</a>
+              <a href="{{route('forget.password.get')}}" class="mt-2 d-flex justify-content-center">forget-password</a>
               <a href="{{route('registration')}}" class="mt-2 d-flex justify-content-center">Sign-Up</a>
           </div>
           </div>

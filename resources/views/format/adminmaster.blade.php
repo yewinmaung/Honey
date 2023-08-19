@@ -60,10 +60,15 @@
                     </a>
 
                     @if($use=='1')
+                        <a href="{{route('staff-account')}}" class="list-group-item list-group-item-action">
+                            <i class="fa fa-users text-custom"></i>
+                            <span class="d-none d-lg-inline">Staff Accounts</span>
+                        </a>
                         <a href="{{route('admin-user-report')}}" class="list-group-item list-group-item-action">
                             <i class="fa fa-flag text-custom"></i>
                             <span class="d-none d-lg-inline">Reports</span>
                         </a>
+
                     @endif
                 </div>
                 <div class="list-group mt-4 text-center text-lg-left px-3">

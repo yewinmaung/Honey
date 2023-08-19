@@ -1,11 +1,18 @@
 @extends("format.master")
 @section("title")
+Booking
+@endsection
+@section("breadCamp")
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="{{route("home")}}" class="owncol">Home</a></li>
+        <li class="breadcrumb-item">Trip Book</li>
 
+    </ol>
 @endsection
 
 @section("content")
+    <div class="" style="width: 100px;height: 100px;"></div>
 <div class="container-fluid">
-    @include("format.breadCamp")
 
     <div class="row">
         <div class="col-12">

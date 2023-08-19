@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>@yield('title')</title>
-    <link rel="stylesheet" href="{{asset('data/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('data/css/admin.css')}}">
-    <link rel="stylesheet" href="{{asset('data/css/font-awesome.min.css')}}">
-    <!-- basic -->
+
+   <!-- basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- mobile metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>@yield("title")</title>
+    <title>Admin Login</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -21,6 +17,9 @@
     <link rel="stylesheet" href="{{asset("data/css/bootstrap.min.css")}}">
 
     <!-- style css -->
+    <link rel="stylesheet" href="{{asset('data/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('data/css/admin.css')}}">
+    <link rel="stylesheet" href="{{asset('data/css/font-awesome.min.css')}}">
 
     <link rel="stylesheet" href="{{asset("data/css/style.css")}}">
     <!-- Responsive-->

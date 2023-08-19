@@ -1,9 +1,18 @@
 @extends("format.master")
+
 @section("title")
     Your Booking Booking Ticket
 @endsection
-@include("format.nav")
+
+@section("breadCamp")
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="{{route("home")}}" class="owncol">Home</a></li>
+        <li class="breadcrumb-item">Your Booking</li>
+
+    </ol>
+@endsection
 @section("content")
+    <div class="" style="width: 100px;height: 200px;"></div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-12 d-flex justify-content-center align-items-center">
@@ -62,7 +71,7 @@
                                     <td colspan="8" class="text-center">
                                         <p>There is No Record</p>
                                         <br>
-                                        <a href="{{route("home")}}" class="">Booking</a>
+                                        <a href="{{route("user.booknow")}}" class="">Booking</a>
                                     </td>
 
                                 </tr>

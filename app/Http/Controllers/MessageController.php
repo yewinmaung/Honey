@@ -28,7 +28,11 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-
+         $request->validate([
+             "cname"=>"required",
+             "cemail"=>"required",
+             "cmessage"=>"required"
+         ]);
         $complain=new Message();
         $complain->cname=$request->cname;
         $complain->cemail=$request->cemail;
