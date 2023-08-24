@@ -2,9 +2,7 @@
 @section('title')
     Staff Infromation
 @endsection
-@section('bookU')
-    <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
-@endsection
+
 @section('breadcamp')
     <ol class="breadcrumb w-100">
        @if($use=='1')

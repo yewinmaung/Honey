@@ -2,9 +2,7 @@
 @section('title')
     Add Staff
 @endsection
-@section('bookU')
-    <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
-@endsection
+
 @section('content')
 <div class="d-flex justify-content-center align-items-center mt-3">
   <div class="card w-75">

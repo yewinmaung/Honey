@@ -42,7 +42,7 @@ class CustonAuthController extends Controller
 
         $data = $request->all();
         $check = $this->create($data);
-return redirect()->route('home');
+        return redirect()->route('home');
     }
     public function create(array $data)
     {

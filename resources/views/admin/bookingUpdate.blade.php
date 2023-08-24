@@ -8,9 +8,7 @@
         <li class="breadcrumb-item active">Detail</li>
     </ol>
 @endsection
-@section('bookU')
-    <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
-@endsection
+
 @section('content')
    @if($use =='1'||$use=="2")
        <div class="row">
@@ -73,7 +71,7 @@
                                        <div class="row">
                                            <div class="col-3">
                                                <select class="custom-select @error("package") is-invalid @enderror" name="package" >
-                                                   <option selected disabled >Select Package</option>
+                                                   <option selected disabled >{{$book->package}}</option>
                                                    <option class="cus-select"  value="holiday">Holiday Trip </option>
                                                    <option class="cus-select" value="honeymoon">HoneyMoon Trip </option>
                                                    <option class="cus-select" value="family">Family Trip </option>

@@ -191,7 +191,8 @@ class AdminPanelController extends Controller
         $use=$users->type;
         $books=Book::paginate(5);
         $bookU=Book::count();
-        return view('admin.booking',compact('books','bookU','use'));
+
+        return view('admin.booking',compact('books','bookU','use',));
     }
 public function adminbooking(Request $request){
     $request->validate([

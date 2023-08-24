@@ -5,6 +5,7 @@ Booking
 @section("breadCamp")
     <ol class="breadcrumb mb-0">
         <li class="breadcrumb-item"><a href="{{route("home")}}" class="owncol">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{route("trip-package")}}" class="owncol">Trip</a></li>
         <li class="breadcrumb-item">Trip Book</li>
 
     </ol>

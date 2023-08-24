@@ -11,7 +11,7 @@
     </ol>
 @endsection
 @section('bookU')
-    <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
+        <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
 @endsection
 @section('content')
     <div class="">
@@ -89,7 +89,7 @@
                 @endforelse
 
             </table>
-            {{$books->links()}}
+
         </div>
 
     </div>

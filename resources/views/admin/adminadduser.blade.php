@@ -2,9 +2,7 @@
 @section("title")
     Add Booking
 @endsection
-@section('bookU')
-    <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
-@endsection
+
 @section('content')
     <div class="row">
         <div class="col-12">

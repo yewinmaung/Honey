@@ -40,7 +40,7 @@ Route::delete('admin/staffinformation/delete/{id}',[\App\Http\Controllers\AdminP
 
 Route::get("admin/message-detail/{id}",[\App\Http\Controllers\AdminPanelController::class,'reportdetail'])->name('admin-message');
 Route::post('admin/adminbook',[\App\Http\Controllers\AdminPanelController::class,'adminbooking'])->name('admin-book');
-Route::get('admin/bookUser',[\App\Http\Controllers\AdminPanelController::class,'bookingUser'])->name('book-user');
+Route::get('admin/bookUser',[\App\Http\Controllers\AdminPanelController::class,'bookingUser'])->name('book-user');//
 Route::post('admin/search',[\App\Http\Controllers\SearchController::class,'search'])->name('admin-actionsearch');
 Route::post('admin/staff/search',[\App\Http\Controllers\SearchController::class,'staffsearch'])->name('staff-search');
 Route::post('admin/staffacc/search',[\App\Http\Controllers\SearchController::class,'staffaccsearch'])->name('staffacc-search');
@@ -67,7 +67,7 @@ Route::get("user/booking/confirm",[\App\Http\Controllers\BookController::class,"
 Route::delete("user/booking/cancel/{id}",[\App\Http\Controllers\BookController::class,"destroy"])->name("book.cancel");
 Route::get("honey/trip",function (){
     return view('user.bagan');
-})->name('bagan');
+})->name('trip-package');
 Route::post("honey/review",[\App\Http\Controllers\MessageController::class,'store'])->name('message.review');
 
 ///////////////

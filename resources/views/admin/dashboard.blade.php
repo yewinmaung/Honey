@@ -84,11 +84,11 @@
                 <div class="col-12 col-md-5">
                     <h1 class="text-custom1">Indicator</h1>
                     <div class="card">
-                        <div class="card-body">
+
                             <div>
-                                <canvas id="myChart" width="100px"></canvas>
+                                <canvas id="myChart" width="100px" height="80px"></canvas>
                             </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="col-12 col-md-7">
@@ -121,34 +121,68 @@
 
         <script src="{{asset('data/js/Chart.min.js')}}"></script>
         <script>
-            const ctx = document.getElementById('myChart');
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June','July','Aug','Sep','Oct','Nov','Dec'],
+                    datasets: [
+                        {
+                            label: 'Users',
+                            data: [1, 19, 3, 5, 2, 3,1, 19, 3, 5, 2, 3],
+                            backgroundColor: [
+                                'rgb(168,159,103)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1,
+                            lineTension: 0
+                        },
+                        {
+                            label: 'Booking',
+                            data: [4, 8, 7, 9, 3, 3,4, 8, 7, 9, 3, 3],
+                            backgroundColor: [
+                                'rgba(255,222,0,0.8)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
 
-            new Chart(ctx, {
-                type: 'pie',
-                data:{
-                    labels: [
-                        'Booking',
-                        'Users',
-                        'Staff',
-                        'Report'
-                    ],
-                    datasets: [{
-                        label: 'My First Dataset',
-                        data: [300, 50, 100,600],
-                        backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)',
-                            'rgb(133,98,1)'
-                        ],
-                        hoverOffset: 4
-                    }]
+                            ],
+                            borderWidth: 1,
+                            lineTension: 0
+                        }
+                    ]
                 },
                 options: {
                     scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
                     }
                 }
             });

@@ -318,43 +318,39 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                 <div class="traveling-box">
                     <i><img src="{{asset("data/icon/travel-icon.png")}}" alt="icon"/></i>
-                    <h3>Different Countrys</h3>
+                    <h3>Holiday Trip</h3>
                     <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                    <div class="read-more">
-                        <a  href="#">Read More</a>
+                    <div class="text-custom">
+                       <p class="text-custom font-weight-bold"> 250000 ks</p>
+                        <p class="font-italic">For 2 People</p>
+                        <i class="">If More People Extra Price (30000 per) Take.</i>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                <div class="traveling-box">
-                    <i><img src="{{asset("data/icon/travel-icon2.png")}}" alt="icon"/></i>
-                    <h3>Mountains Tours</h3>
-                    <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                    <div class="read-more">
-                        <a  href="#">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                 <div class="traveling-box">
                     <i><img src="{{asset("data/icon/travel-icon3.png")}}" alt="icon"/></i>
-                    <h3>Bus Tours</h3>
+                    <h3>Family Trip</h3>
                     <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                    <div class="read-more">
-                        <a  href="#">Read More</a>
+                    <div class="text-custom">
+                        <p class="text-custom font-weight-bold"> 600000 ks</p>
+                        <p class="font-italic">For 5 People</p>
+                        <i class="">If More People Extra Price (10000 per) Take.</i>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                 <div class="traveling-box">
                     <i><img src="{{asset("data/icon/travel-icon4.png")}}" alt="icon"/></i>
-                    <h3>Summer Rest</h3>
+                    <h3>Honey Moon Trip</h3>
                     <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                    <div class="read-more">
-                        <a  href="#">Read More</a>
+                    <div class="text-custom">
+                        <p class="text-custom font-weight-bold"> 500000 ks</p>
+                        <p class="font-italic">For 2 People</p>
+
                     </div>
                 </div>
             </div>
@@ -397,23 +393,23 @@
                 <div class="col-md-12">
                     <div class="owl-carousel owl-theme">
                         <div class="item">
-                            <img class="img-responsive" src="{{asset("data/images/1.jpg")}}" alt="#" />
-                            <h3>Holiday Tour</h3>
+                            <img class="img-responsive" src="{{asset("data/images/trip/dawei.jpg")}}" alt="#" />
+                            <h3>Dawei</h3>
                             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="{{asset("data/images/2.jpg")}}" alt="#" />
-                            <h3>New York</h3>
+                            <img class="img-responsive" src="{{asset("data/images/trip/bagan.jpg")}}" alt="#" />
+                            <h3>Bagan</h3>
                             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="{{asset("data/images/3.jpg")}}" alt="#" />
-                            <h3>London</h3>
+                            <img class="img-responsive" src="{{asset("data/images/trip/ngapali.jpg")}}" alt="#" />
+                            <h3>NgaPali</h3>
                             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="{{asset("data/images/2.jpg")}}" alt="#" />
-                            <h3>Holiday Tour</h3>
+                            <img class="img-responsive" src="{{asset("data/images/trip/mkn.jpg")}}" alt="#" />
+                            <h3>MyitKyiNa</h3>
                             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
                         </div>
                     </div>
@@ -432,10 +428,10 @@
                         <h2>Amazing London Tour</h2>
                         <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there</span>
                    @guest
-                            <a href="{{route("login")}}">Book Now</a><a href="{{route('bagan')}}">Get More</a>
+                            <a href="{{route("login")}}">Book Now</a><a href="{{route('trip-package')}}">Get More</a>
 
                         @else
-                            <a href="{{route("user.booknow")}}">Book Now</a><a href="{{route('bagan')}}">Get More</a>
+                            <a href="{{route("user.booknow")}}">Book Now</a><a href="{{route('trip-package')}}">Get More</a>
 
                         @endguest
 
