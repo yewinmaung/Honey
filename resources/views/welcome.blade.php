@@ -209,60 +209,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            <select class="custom-select @error("hour") is-invalid @enderror" name="hour" >
-                                <option class="cus-select" selected disabled>Hour</option>
-                                <option class="cus-select"  value="1">1</option>
-                                <option class="cus-select"  value="2">2</option>
-                                <option class="cus-select"  value="3">3</option>
-                                <option class="cus-select"  value="4">4</option>
-                                <option class="cus-select"  value="5">5</option>
-                                <option class="cus-select"  value="6">6</option>
-                                <option class="cus-select"  value="7">7</option>
-                                <option class="cus-select"  value="8">8</option>
-                                <option class="cus-select"  value="9">9</option>
-                                <option class="cus-select"  value="10">10</option>
-                                <option class="cus-select"  value="11">11</option>
-                                <option class="cus-select"  value="12">12</option>
-                            </select>
-                            @error("hour")
-                            <div class="text-danger invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="col-4">
-                            <select class="custom-select @error("minute") is-invalid @enderror" name="minute" >
-                                <option value="" selected disabled class="cus-select">Minute</option>
-                                <option class="cus-select"  value=":10:">10</option>
-                                <option class="cus-select"  value=":15:">15</option>
-                                <option class="cus-select"  value=":20:">20</option>
-                                <option class="cus-select"  value=":25:">25</option>
-                                <option class="cus-select"  value=":30:">30</option>
-                                <option class="cus-select"  value=":35:">35</option>
-                                <option class="cus-select"  value=":40:">40</option>
-                                <option class="cus-select"  value=":45:">45</option>
-                                <option class="cus-select"  value=":50:">50</option>
-                                <option class="cus-select"  value=":55:">55</option>
-                                <option class="cus-select"  value=":00:">00</option>
-
-                            </select>
-                            @error("minute")
-                            <div class="text-danger invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="col-4">
-                            <select class="custom-select @error("dp") is-invalid @enderror" name="dp" >
-                                <option selected disabled >Select AM or PM</option>
-                                <option class="cus-select"  value="AM">AM</option>
-                                <option class="cus-select" value="PM">PM</option>
-                            </select>
-
-                            @error("dp")
-                            <div class="text-danger invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-12 traveling-box">
                             <div class="read-more">
@@ -358,25 +304,7 @@
     </div>
 </div>
 <!-- end traveling -->
-<!--London -->
-<div class="London">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="titlepage">
-                    <h2>Weekend in Bagan</h2>
-                    <span>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="London-img">
-            <figure><img src="{{asset("data/images/bagan.jpg ")}}" style="width: 100%;height: 40%" alt="img"></figure>
-        </div>
-    </div>
-</div>
-<!-- end London -->
+
 <!--Tours -->
 <div class="Tours">
     <div class="container">
@@ -419,30 +347,7 @@
     </div>
 </div>
 <!-- end Tours -->
-<!-- Amazing -->
-<div class="amazing">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                    <div class="amazing-box">
-                        <h2>Amazing London Tour</h2>
-                        <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there</span>
-                   @guest
-                            <a href="{{route("login")}}">Book Now</a><a href="{{route('trip-package')}}">Get More</a>
 
-                        @else
-                            <a href="{{route("user.booknow")}}">Book Now</a><a href="{{route('trip-package')}}">Get More</a>
-
-                        @endguest
-
-                    </div>
-
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end Amazing -->
 <!-- our blog -->
 <div id="blog" class="blog">
     <div class="container">
@@ -525,18 +430,46 @@
                         @csrf
                         <div class="Follow">
                             <h3> Contact</h3>
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                    <input class="Newsletter" name="cname" placeholder="Name" type="text">
+                            <form action="{{route("message.review")}}" class="">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <input class="Newsletter form-control @error("cname")is-invalid @enderror" name="cname" placeholder="Name" type="text" >
+                                        @error("cname")
+                                        <p class="text-danger invalid-feedback">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group">
+
+                                            <input type="text" name="cemail" class="Newsletter form-control @error("cemail") is-invalid @enderror" placeholder="E-mail">
+                                            @error("cemail")
+                                            <p class="text-danger invalid-feedback">{{$message}}</p>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group">
+
+                                            <input type="text" name="title" class="Newsletter form-control @error("title") is-invalid @enderror" placeholder="E-mail">
+                                            @error("title")
+                                            <p class="text-danger invalid-feedback">{{$message}}</p>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <textarea class="textarea form-control @error("cmessage")is-invalid @enderror" name="cmessage"  placeholder="comment" type="text" >Comment</textarea>
+                                            @error("cmesage")
+                                            <p class="text-danger invalid-feedback">{{$message}}</p>
+                                            @enderror
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                    <input class="Newsletter" name="cemail" placeholder="Email" type="text">
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                    <textarea class="textarea" name="cmessage" placeholder="comment" type="text">Comment</textarea>
-                                </div>
-                            </div>
-                            <button class="Subscribe">Submit</button>
+                                <button class="Subscribe" type="submit">Submit</button>
+                            </form>
                         </div>
                     </form>
                 </div>

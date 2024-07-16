@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hotel;
+use App\Models\Message;
+use App\Models\Town;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -27,6 +31,7 @@ class AdminAuthController extends Controller
        if (Auth::attempt($credential)) {
            $aut=Auth::user()->id;
            $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
+
            $use=$users->type;
            if ($use){
                if ($use=='1'){
@@ -52,30 +57,11 @@ class AdminAuthController extends Controller
     }
 
     public function Registration(){
-        $aut=Auth::user()->id;
-        $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
-        $use=$users->type;
-        return view("adminauth.registration",compact('use'));
-    }
+
+        }
     public function cusRegistration(Request $request){
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'type'=>'required'
-        ]);
-
-        $aut=Auth::user()->id;
-        $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
-        $use=$users->type;
-        $admin=new User();
-        $admin->name=$request->name;
-        $admin->email=$request->email;
-        $admin->password=$request->password;
-        $admin->type=$request->type;
-        $admin->save();
-        return redirect()->route('dashboard',compact('use'));
+        return $request;
     }
 
 

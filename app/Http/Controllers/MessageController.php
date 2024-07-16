@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -28,31 +30,52 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
+
          $request->validate([
              "cname"=>"required",
              "cemail"=>"required",
-             "cmessage"=>"required"
+
          ]);
         $complain=new Message();
         $complain->cname=$request->cname;
         $complain->cemail=$request->cemail;
         $complain->cmessage=$request->cmessage;
+        $complain->title=$request->title;
         $complain->save();
-        return redirect()->back();
+        return redirect()->back()->withSuccess("Send Message");
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Message $message)
+    public function show(Request $request)
     {
+        $id=$request->id;
+        $detail=DB::select("select * from `messages`where messages.id=:id",['id'=>$id]);
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
+    public function reply(Request $message){
+        //$rp=DB::select("select * from `messages` where messages.id=:id",['id'=>$message->id]);
+        $to_email = $message->cemail;
+        $subject = $message->title;
+        $reply=$message->cmessage;
+        //$body = "Hello,nn It is a testing email sent by PHP Script";
+        $headers = "From: sender\'s email";
+
+        if (mail($to_email, $subject, $reply, $headers)) {
+            echo "Email successfully sent to $to_email...";
+            return redirect()->route("dashboard")->withSuccess("Sent Succefully...");
+        }
+        else {
+            return redirect()->back()->withSuccess("error");
+        }
+
+    }
     public function edit(Message $message)
     {
         //

@@ -14,12 +14,12 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card">
-                        <h3 class="card-header text-center">Create Staff Account</h3>
+                        <h3 class="card-header text-center">Edit Package</h3>
                         <div class="card-body">
                             <form action="{{ route('staffacc-update') }}" method="POST">
                                 @csrf
                                 <div class="form-group mb-3">
-                                    <input type="text" placeholder="ID" id="name" class="form-control @error("id") is-invalid @enderror" name="id"
+                                    <input type="hidden" placeholder="ID" id="name" class="form-control @error("id") is-invalid @enderror" name="id"
                                            value="{{$user->id}}"    autofocus>
                                     @error("id")
                                     <div class="text-danger invalid-feedback">{{$message}}</div>

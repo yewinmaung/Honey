@@ -13,7 +13,7 @@
                        <div class="card">
                            <div class="card-header bg-secondary">
                                <img src="{{asset('data/images/1x/honey_logo-3.png')}}" alt="" class="mb-3">
-                               <h3 class="text-warning">Staff Requirements</h3>
+                               <h3 class="text-warning">Booking</h3>
                            </div>
                            <div class="card-body">
                                <form method="post" action="{{route("admin-book")}}" class="form-group border p-3 form-bg ">
@@ -96,53 +96,7 @@
                                        </div>
                                    </div>
 
-                                   <div class="row">
-                                       <div class="col-4">
-                                           <select class="custom-select @error("hour") is-invalid @enderror" name="hour" >
-                                               <option class="cus-select" selected disabled>Hour</option>
-                                               <option class="cus-select"  value="1">1</option>
-                                               <option class="cus-select"  value="2">2</option>
-                                               <option class="cus-select"  value="3">3</option>
-                                               <option class="cus-select"  value="4">4</option>
-                                               <option class="cus-select"  value="5">5</option>
-                                               <option class="cus-select"  value="6">6</option>
-                                               <option class="cus-select"  value="7">7</option>
-                                               <option class="cus-select"  value="8">8</option>
-                                               <option class="cus-select"  value="9">9</option>
-                                               <option class="cus-select"  value="10">10</option>
-                                               <option class="cus-select"  value="11">11</option>
-                                               <option class="cus-select"  value="12">12</option>
-                                           </select>
-                                       </div>
-                                       <div class="col-4">
-                                           <select class="custom-select @error("min") is-invalid @enderror" name="minute" >
-                                               <option value="" selected disabled class="cus-select">Minute</option>
-                                               <option class="cus-select"  value=":10:">10</option>
-                                               <option class="cus-select"  value=":15:">15</option>
-                                               <option class="cus-select"  value=":20:">20</option>
-                                               <option class="cus-select"  value=":25:">25</option>
-                                               <option class="cus-select"  value=":30:">30</option>
-                                               <option class="cus-select"  value=":35:">35</option>
-                                               <option class="cus-select"  value=":40:">40</option>
-                                               <option class="cus-select"  value=":45:">45</option>
-                                               <option class="cus-select"  value=":50:">50</option>
-                                               <option class="cus-select"  value=":55:">55</option>
-                                               <option class="cus-select"  value=":00:">00</option>
 
-                                           </select>
-                                       </div>
-                                       <div class="col-4">
-                                           <select class="custom-select @error("dp") is-invalid @enderror" name="dp" >
-                                               <option selected disabled >Select AM or PM</option>
-                                               <option class="cus-select"  value="AM">AM</option>
-                                               <option class="cus-select" value="PM">PM</option>
-                                           </select>
-
-                                           @error("package")
-                                           <div class="text-danger invalid-feedback">{{$message}}</div>
-                                           @enderror
-                                       </div>
-                                   </div>
                                    <div class="row">
                                        <div class="col-12 traveling-box">
                                            <div class="read-more">

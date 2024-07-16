@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('cname');
             $table->string('cemail');
-            $table->string('cmessage');
+            $table->string('cmessage')->nullable();
+            $table->string("title")->nullable();
             $table->timestamps();
         });
     }

@@ -12,6 +12,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="{{asset("data/images/1x/honet_logo-3.png")}}" type="image/x-icon"/>
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{asset("data/css/bootstrap.min.css")}}">
 

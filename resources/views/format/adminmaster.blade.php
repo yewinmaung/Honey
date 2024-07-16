@@ -17,6 +17,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="{{asset("data/images/1x/honey_logo-3.png")}}"/>
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{asset("data/css/bootstrap.min.css")}}">
 
@@ -43,55 +44,57 @@
              <span class="list-group-item disabled d-none d-lg-block">
                   <small>CONTROLS</small>
                     </span>
-                  @if($use =='1')
+
                         <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action">
                             <i class="fa fa-home text-custom"></i>
                             <span class="d-none d-lg-inline">Dashboard</span>
                         </a>
-                    @endif
+
                      <a href="{{route('book-user')}}" class="list-group-item list-group-item-action">
                         <i class="fa fa-users text-custom"></i>
                         <span class="d-none d-lg-inline">Booking Users</span>
                        @yield('bookU')
                         </a>
-                    <a href="{{route('admin-staff')}}" class="list-group-item list-group-item-action">
+                    <a href="{{route('plist')}}" class="list-group-item list-group-item-action">
                         <i class="fa fa-line-chart text-custom"></i>
-                        <span class="d-none d-lg-inline">Staff Information</span>
+                        <span class="d-none d-lg-inline">Packages</span>
                     </a>
 
-                    @if($use=='1')
-                        <a href="{{route('staff-account')}}" class="list-group-item list-group-item-action">
-                            <i class="fa fa-users text-custom"></i>
-                            <span class="d-none d-lg-inline">Staff Accounts</span>
-                        </a>
                         <a href="{{route('admin-user-report')}}" class="list-group-item list-group-item-action">
                             <i class="fa fa-flag text-custom"></i>
                             <span class="d-none d-lg-inline">Reports</span>
                         </a>
 
-                    @endif
+
                 </div>
                 <div class="list-group mt-4 text-center text-lg-left px-3">
-         <span class="list-group-item disabled d-none d-lg-block">
-           <small>ACTIONS</small>
-         </span>
-                   @if($use=='1'||$use=='2')
+                    <span class="list-group-item disabled d-none d-lg-block">
+                     <small>ACTIONS</small>
+                     </span>
+
                         <a href="{{route('admin-user-upload')}}" class="list-group-item list-group-item-action">
                             <i class="fa fa-user text-custom"></i>
                             <span class="d-none d-lg-inline">New Book User</span>
                         </a>
-                    @endif
-                @if($use =='1')
-                        <a href="{{route('admin-upload')}}" class="list-group-item list-group-item-action">
-                            <i class="fa fa-edit text-custom"></i>
-                            <span class="d-none d-lg-inline">Add New Staff</span>
-                        </a>
+                    <a href="{{route('gust')}}" class="list-group-item list-group-item-action">
+                        <i class="fa fa-edit text-custom"></i>
+                        <span class="d-none d-lg-inline">Hotel and RoomType</span>
+                    </a>
+                    <a href="{{route('addtown')}}" class="list-group-item list-group-item-action">
+                        <i class="fa fa-edit text-custom"></i>
+                        <span class="d-none d-lg-inline">Hotel Info</span>
+                    </a>
+
                         <a href="{{route('staff-reg')}}" class="list-group-item list-group-item-action">
                             <i class="fa fa-edit text-custom"></i>
-                            <span class="d-none d-lg-inline">Create Staff Account</span>
+                            <span class="d-none d-lg-inline">Create Trip</span>
                         </a>
-                    @endif
 
+
+                    <a href="{{route("adminprofile")}}" class="list-group-item list-group-item-action">
+                        <i class="fa fa-edit text-custom"></i>
+                        <span class="d-none d-lg-inline">Profile</span>
+                    </a>
                 </div>
             </nav>
             <main class="col-10 bg-custom50">
@@ -121,7 +124,7 @@
                                     </a>
 
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item log" href="#">Profile</a>
+                                        <a class="dropdown-item log" href="{{route("adminprofile")}}">Profile</a>
                                         <a class="dropdown-item log" href="{{ route('admin-logout') }}">Logout</a></div>
                                 </div>
                             </li>

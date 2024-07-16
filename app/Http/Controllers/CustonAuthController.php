@@ -46,10 +46,13 @@ class CustonAuthController extends Controller
     }
     public function create(array $data)
     {
+
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'img'=>'download.png'
         ]);
     }
 

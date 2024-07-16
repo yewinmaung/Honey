@@ -81,42 +81,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-5">
-                    <h1 class="text-custom1">Indicator</h1>
-                    <div class="card">
+                @if (session('success'))
+                    <script>
+                     alert("{{"success"}}")
+                    </script>
+                @endif
 
-                            <div>
-                                <canvas id="myChart" width="100px" height="80px"></canvas>
-                            </div>
-
-                    </div>
-                </div>
-                <div class="col-12 col-md-7">
-                    <h1 class="text-custom1">Staff Infromation</h1>
-                    <table class="table bg-white">
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>E-mail</th>
-                            <th>Phone</th>
-
-
-                        </tr>
-                        @foreach($admins as $admin)
-                            <tr>
-                                <td>{{$admin->id}}</td>
-                                <td style="text-transform: capitalize;">{{$admin->name}}</td>
-                                <td>{{$admin->job}}</td>
-                                <td>{{$admin->email}}</td>
-                                <td>{{$admin->phone}}</td>
-                            </tr>
-                        @endforeach
-                    </table>
-                    {{$admins->links()}}
-                </div>
-
-            </div>
         </div>
 
         <script src="{{asset('data/js/Chart.min.js')}}"></script>

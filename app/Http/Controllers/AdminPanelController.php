@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class AdminPanelController extends Controller
@@ -87,18 +88,45 @@ class AdminPanelController extends Controller
 
     }
 
+
     /**
      * Display the specified resource.
      */
     public function show()
     {
-        $aut=Auth::user()->id;
-        $users=User::findorfail($aut);
-        $use=$users->type;
-        $bookU=Book::count();
-       return view('admin.staff',['admins'=>Admin::paginate(5)],compact('bookU','use'));
-    }
+   }
+public function adminProfileProcess(Request $request){
+        $request->validate([
+            'img'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            "name"=>"required",
+            "email"=>"required",
+            "pwd"=>"required",
+            'cpwd'=>"required"
+        ]);
+        $pwd=$request->pwd;
+        $cpwd=$request->cpwd;
+        if($pwd!=$cpwd){
+            return redirect()->back()->withSuccess("Passowrd are not Match!Try Again");
+        }
+        else {
+            $aut=Auth::user()->id;
+            $user=User::findorfail($aut);
+            if ($image = $request->file('img'))
+            {
+                $destinationPath = 'images/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $user['img'] = "$profileImage";
+            }
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $user->password=Hash::make($pwd);
+            //$user->cpwd=$cpwd;
+            $user->update();
+            return redirect()->back()->withSuccess("Success");
+        }
 
+}
     /**
      * Show the form for editing the specified resource.
      */
@@ -192,7 +220,7 @@ class AdminPanelController extends Controller
         $books=Book::paginate(5);
         $bookU=Book::count();
 
-        return view('admin.booking',compact('books','bookU','use',));
+        return view('admin.booking',compact('books','bookU','use'));
     }
 public function adminbooking(Request $request){
     $request->validate([
@@ -249,6 +277,9 @@ public function staffAccount(){
     }
     return view("admin.staffaccount",compact('staffacc',"use","admins"));
 
+}
+public function adminProfile(){
+        return view("admin/adminprofile");
 }
 public function staffAccEdit(Request $request,$id){
        $user=User::findorfail($id);

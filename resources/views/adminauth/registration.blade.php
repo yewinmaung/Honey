@@ -9,47 +9,80 @@
                   <div class="row justify-content-center">
                       <div class="col-md-6">
                           <div class="card">
-                              <h3 class="card-header text-center">Create Staff Account</h3>
+                              <h3 class="card-header text-center">Create Travel Package</h3>
                               <div class="card-body">
-                                  <form action="{{ route('staff-cus-reg') }}" method="POST">
+                                  @if (session('success'))
+
+                                      <div class="alert alert-success" role="alert">
+                                          {{session('success')}}
+                                      </div>
+
+                                  @endif
+                                  <form action="{{ route('package') }}" method="POST" enctype="multipart/form-data">
                                       @csrf
+                                      <div class="form-group">
+                                          <input type="file" class="form-control" name="img">
+                                      </div>
                                       <div class="form-group mb-3">
-                                          <input type="text" placeholder="Name" id="name" class="form-control @error("name") is-invalid @enderror" name="name"
+                                          <input type="text" placeholder="Title" class="form-control @error("title") is-invalid @enderror" name="name"
                                                   autofocus>
-                                          @error("name")
+                                          @error("title")
                                           <div class="text-danger invalid-feedback">{{$message}}</div>
                                           @enderror
                                       </div>
-                                      <div class="form-group mb-3">
-                                          <input type="text" placeholder="Email" id="email_address" class="form-control @error("email") is-invalid @enderror"
-                                                 name="email"  autofocus>
-                                          @error("email")
-                                          <div class="text-danger invalid-feedback">{{$message}}</div>
-                                          @enderror
-                                      </div>
-                                      <div class="form-group mb-3">
-                                          <input type="password" placeholder="Password" id="password" class="form-control @error("password") is-invalid @enderror"
-                                                 name="password">
-                                          @error("job")
-                                          <div class="text-danger invalid-feedback">{{$message}}</div>
-                                          @enderror
-                                      </div>
-                                      <div class="col-md-4 form-group">
-                                          <label  class="form-label text-custom">Role</label>
-                                          <select class="custom-select @error("type") is-invalid @enderror" name="type" >
-                                              <option selected disabled >Position</option>
-                                              <option class="cus-select" value="1">Manager</option>
-                                              <option class="cus-select"  value="2">customer_Service</option>
-                                              <option class="cus-select" value="3">Driver</option>
 
+
+                                      <div class="form-group mb-3">
+                                          <input type="text" placeholder="Price" class="form-control @error("price") is-invalid @enderror"
+                                                 name="price">
+                                          @error("price")
+                                          <div class="text-danger invalid-feedback">{{$message}}</div>
+                                          @enderror
+                                      </div>
+
+                                      <div class=" form-group">
+                                          <label  class="form-label text-custom">Hotel</label>
+                                          <select class="custom-select @error("hotel") is-invalid @enderror" name="hotel" >
+                                              @foreach($hotels as $hotel)
+                                              <option class="cus-select" value="{{$hotel->name}}">{{$hotel->name}}</option>
+                                              @endforeach
                                           </select>
-
-                                          @error("type")
+                                          @error("hotel")
                                           <div class="text-danger invalid-feedback">{{$message}}</div>
                                           @enderror
                                       </div>
-                                      <div class="d-grid mx-auto">
-                                          <button type="submit" class="btn btn-warning btn-block">Sign up</button>
+                                      <div class=" form-group">
+                                          <label  class="form-label text-custom">Room Type</label>
+                                          <select class="custom-select @error("rtype") is-invalid @enderror" name="rtype" >
+                                              @foreach($rooms as $room)
+                                              <option class="cus-select" value="{{$room->name}}">{{$room->name}}</option>
+                                              @endforeach
+                                          </select>
+                                          @error("rtype")
+                                          <div class="text-danger invalid-feedback">{{$message}}</div>
+                                          @enderror
+                                      </div>
+                                      <div class="form-group mb-3">
+                                          <input type="text" placeholder="No:People" class="form-control @error("nop") is-invalid @enderror"
+                                                 name="nop">
+                                          @error("nop")
+                                          <div class="text-danger invalid-feedback">{{$message}}</div>
+                                          @enderror
+                                      </div>
+
+                                          <div class="form-group">
+                                              <textarea class="textarea form-control @error("dec")is-invalid @enderror" name="dec"  placeholder="Description" type="text" ></textarea>
+                                              @error("dec")
+                                              <p class="text-danger invalid-feedback">{{$message}}</p>
+                                              @enderror
+                                          </div>
+
+                                      <div class="mx-auto d-flex justify-content-end">
+                                          <div class="">
+                                              <button type="reset" class="read-more">Cancel</button>
+                                              <button type="submit" class="read-more">Create</button>
+
+                                          </div>
                                       </div>
                                   </form>
                               </div>

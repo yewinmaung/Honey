@@ -24,10 +24,8 @@ Route::get('admin/upload',[\App\Http\Controllers\AdminPanelController::class,'cr
 Route::post('admin/apply',[\App\Http\Controllers\AdminPanelController::class,'store'])->name('admin-apply');
 Route::get('admin/user-upload',[\App\Http\Controllers\AdminPanelController::class,'upload'])->name('admin-user-upload');
 Route::get('admin/report',[\App\Http\Controllers\AdminPanelController::class,'report'])->name('admin-user-report');
-
-Route::get('admin/staffInformation',[\App\Http\Controllers\AdminPanelController::class,'show'])->name('admin-staff');
 Route::get('admin/staffaccount',[\App\Http\Controllers\AdminPanelController::class,'staffAccount'])->name('staff-account');
-
+Route::post("admin/reply",[\App\Http\Controllers\MessageController::class,'reply'])->name("reply");
 Route::get("admin/staffaccount/{id}",[\App\Http\Controllers\AdminPanelController::class,"staffAccEdit"])->name('staffaccedit');
 Route::post("admin/staffaccount-update",[\App\Http\Controllers\AdminPanelController::class,'staffupdate'])->name('staffacc-update');
 Route::delete("admin/staffaccount/{id}",[\App\Http\Controllers\AdminPanelController::class,"staffAccDelete"])->name("staffaccdelete");
@@ -46,6 +44,17 @@ Route::post('admin/staff/search',[\App\Http\Controllers\SearchController::class,
 Route::post('admin/staffacc/search',[\App\Http\Controllers\SearchController::class,'staffaccsearch'])->name('staffacc-search');
 Route::get('admin/done/{id}',[\App\Http\Controllers\PaymentController::class,'edit'])->name('done');
 Route::put('admin/done/{id}',[\App\Http\Controllers\PaymentController::class,'update'])->name('book-done');
+Route::get("admin/profile",[\App\Http\Controllers\AdminPanelController::class,"adminProfile"])->name("adminprofile");
+Route::post("admin/profile",[\App\Http\Controllers\AdminPanelController::class,"adminProfileProcess"])->name("aprofile");
+Route::post("admin/hotel",[\App\Http\Controllers\TownController::class,"store"])->name("hotel");
+Route::get("admin/hotellist",[\App\Http\Controllers\TownController::class,'show'])->name("hotelshow");
+Route::delete("admin/hoteldel/{id}",[\App\Http\Controllers\TownController::class,"destroy"])->name("hdelete");
+Route::get("admin/hoteledit/{id}",[\App\Http\Controllers\TownController::class,"edit"])->name("hoteledit");
+Route::post("admin/hotelupdate",[\App\Http\Controllers\TownController::class,"update"])->name("hupdate");
+Route::get("admin/gust",[\App\Http\Controllers\TownController::class,"gust"])->name("gust");
+Route::post("admin/gust",[\App\Http\Controllers\TownController::class,"gustInfo"])->name("gustInfo");
+Route::post("admin/room",[\App\Http\Controllers\TownController::class,"room"])->name("room");
+Route::delete("admin/roomdel/{id}",[\App\Http\Controllers\TownController::class,"rdel"])->name("rdel");
 //EndAdmin
 //Authentication
 Route::get('homeView',[\App\Http\Controllers\CustonAuthController::class,'homeView'])->name('homeView');
@@ -57,8 +66,10 @@ Route::get('signout',[\App\Http\Controllers\CustonAuthController::class,'signout
 
 Route::get('admin/login',[\App\Http\Controllers\AdminAuthController::class,"index"])->name("admin-login");
 Route::post('admin/cus/login',[\App\Http\Controllers\AdminAuthController::class,'customLogin'])->name("admin-cuslogin");
-Route::get('admin/staff/registration',[\App\Http\Controllers\AdminAuthController::class,"Registration"])->name('staff-reg');
-Route::post('admin/staff/registration',[\App\Http\Controllers\AdminAuthController::class,'cusRegistration'])->name('staff-cus-reg');
+Route::get('admin/packages',[\App\Http\Controllers\PackageController::class,'index'])->name('staff-reg');
+Route::post('admin/packages',[\App\Http\Controllers\PackageController::class,"store"])->name('package');
+Route::get("admin/packagelist",[\App\Http\Controllers\PackageController::class,'show'])->name("plist");
+Route::get("admin/addtown",[\App\Http\Controllers\TownController::class,"index"])->name("addtown");
 Route::get('admin/signout',[\App\Http\Controllers\AdminAuthController::class,'signout'])->name('admin-logout');
 //end Authentication
 Route::post("user/booking",[\App\Http\Controllers\BookController::class,"store"])->name("user.store");
@@ -68,8 +79,7 @@ Route::delete("user/booking/cancel/{id}",[\App\Http\Controllers\BookController::
 Route::get("honey/trip",function (){
     return view('user.bagan');
 })->name('trip-package');
-Route::post("honey/review",[\App\Http\Controllers\MessageController::class,'store'])->name('message.review');
-
+Route::post("user/review",[\App\Http\Controllers\MessageController::class,'store'])->name('message.review');
 ///////////////
 Route::get('forget-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 Route::post('forget-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');

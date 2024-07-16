@@ -21,7 +21,7 @@
                       <th>#</th>
                       <th>Name</th>
                       <th>E-Mail</th>
-                      <th>Message</th>
+                      <th>Subject</th>
                       <th>Date</th>
                       <th>Controls</th>
                   </tr>
@@ -32,7 +32,7 @@
                          <td>{{$message->id}}</td>
                           <td>{{$message->cname}}</td>
                           <td>{{$message->cemail}}</td>
-                          <td>{{$message->cmessage}}</td>
+                          <td>{{$message->title}}</td>
                           <td>{{$message->updated_at}}</td>
                           <td>
                               <a href="{{route('admin-message',$message->id)}}" class="btn btn-outline-secondary d-inline">Detail</a>
