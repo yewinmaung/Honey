@@ -15,7 +15,7 @@
     <meta name="author" content="">
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{asset("data/css/bootstrap.min.css")}}">
-
+    <link rel="icon" href="{{asset("data/images/1x/honey_logo-3.png")}}"/>
     <!-- style css -->
     <link rel="stylesheet" href="{{asset('data/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('data/css/admin.css')}}">

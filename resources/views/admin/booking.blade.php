@@ -2,17 +2,67 @@
 @section('title')
     Booking
 @endsection
+@section("controls")
+    <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-home text-custom"></i>
+        <span class="d-none d-lg-inline">Dashboard</span>
+    </a>
+    <a href="{{route('book-user')}}" class="list-group-item list-group-item-action cusactive">
+        <i class="fa fa-users text-custom"></i>
+        <span class="d-none d-lg-inline">Booking Lists</span>
+        @yield('bookU')
+    </a>
+    <a href="{{route('plist')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-line-chart text-custom"></i>
+        <span class="d-none d-lg-inline">Packages</span>
+    </a>
+    <a href="{{route('admin-user-report')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-flag text-custom"></i>
+        <span class="d-none d-lg-inline">Reports</span>
+    </a>
+
+@endsection
+@section("actions")
+    <a href="{{route('abook')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-user text-custom"></i>
+        <span class="d-none d-lg-inline">New Book User</span>
+    </a>
+    <a href="{{route('gust')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-hotel text-custom"></i>
+        <span class="d-none d-lg-inline">New Hotel</span>
+    </a>
+    <a href="{{route('gust-room')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-tag text-custom"></i>
+        <span class="d-none d-lg-inline">Room Types</span>
+    </a>
+    <a href="{{route('addtown')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-table text-custom"></i>
+        <span class="d-none d-lg-inline">Hotel Info</span>
+    </a>
+    <a href="{{route('restau')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-hand-spock-o h1 text-col1 text-custom"></i>
+
+        <span class="d-none d-lg-inline">Restaurants</span>
+    </a>
+    <a href="{{route('staff-reg')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-location-arrow text-custom"></i>
+        <span class="d-none d-lg-inline">Create Trip</span>
+    </a>
+    <a href="{{route("adminprofile")}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-edit text-custom"></i>
+        <span class="d-none d-lg-inline">Profile</span>
+    </a>
+
+@endsection
 @section('breadcamp')
     <ol class="breadcrumb w-100">
-        @if($use=='1')
+
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}" class="owncol">Home</a></li>
-        @endif
-        <li class="breadcrumb-item active">Booking-Information</li>
+
+        <li class="breadcrumb-item active">Booking</li>
     </ol>
 @endsection
-@section('bookU')
-        <span class="d-none d-lg-inline badge bg-danger rounded-pill float-right">{{$bookU}}</span>
-@endsection
+
 @section('content')
     <div class="">
         <div class="col-12">
@@ -21,8 +71,10 @@
                 <form method="post" action="{{route("admin-actionsearch")}}" class="form-inline">
                     @csrf
                     <div class="input-group pb-1">
-                        <input type="search" name="search" class="mx-1" placeholder="Searching With NIC">
-                        <button class="btn btn-cus-col m-0 p-2" type="submit">Submit</button>
+                        <input type="search" name="search" class="mx-1" placeholder="NIC">
+                        <button class="btn btn-cus-col m-0 p-2" type="submit">
+                            <i class="fa fa-search"></i>
+                            Search</button>
                     </div>
                 </form>
             </div>
@@ -32,10 +84,10 @@
                     <th>Name</th>
                     <th>NIC</th>
                     <th>Phone</th>
-                    <th>Trip</th>
+                    <th>Start Place</th>
                     <th>Package</th>
                     <th>Date</th>
-                    <th>Time</th>
+
                     @if($use=='1'||$use=='2')
                     <th>Payment</th>
                         <th>Service By</th>
@@ -48,14 +100,11 @@
                         <td>{{$book->name}}</td>
                         <td>{{$book->nic}}</td>
                         <td>{{$book->phone}}</td>
-                        <td class="text-capitalize">{{$book->trip}}</td>
+                        <td class="text-capitalize">{{$book->location}}</td>
                         <td class="text-capitalize">{{$book->package}}</td>
                         <td>{{$book->date}}</td>
-                        <td>{{$book->hour}}
-                            {{$book->minute}}
-                            {{$book->am_or_pm}}
-                        </td>
-                        @if($use=='1'||$use=='2')
+
+
                          <td class="d-flex">
                              @if($book->isclear=='0')
                                  <a href="{{route('done',$book->id)}}" class="btn btn-warning d-inline-block mx-1">UnPaid</a>
@@ -67,7 +116,7 @@
                                     </form>
                                 </div>
                                  @elseif($book->isclear=='1')
-                                 <a href="{{route('done',$book->id)}}" class="btn btn-warning">Paid</a>
+                                 <label href="#" class="bg-warning text-dark p-2">Paid</label>
                                  @endif
                          </td>
                             @if($book->isclear=='1')
@@ -75,7 +124,7 @@
                                     <small class="border bg-warning text-dark px-3 py-1">{{$book->updated_at}}</small>
                                 </td>
                         @endif
-                        @endif
+
                     </tr>
 
                 @empty
@@ -89,7 +138,7 @@
                 @endforelse
 
             </table>
-
+           {{$books->links()}}
         </div>
 
     </div>

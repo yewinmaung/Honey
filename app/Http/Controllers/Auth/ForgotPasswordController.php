@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendEmail;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
@@ -30,6 +31,8 @@ class ForgotPasswordController extends Controller
      */
     public function submitForgetPasswordForm(Request $request)
     {
+
+
         $request->validate([
             'email' => 'required|email|exists:users',
         ]);
@@ -38,9 +41,19 @@ class ForgotPasswordController extends Controller
         DB::table('password_resets')->insert([
                   'email' => $request->email,
                   'token' => $token,
+
                   'created_at' => Carbon::now()
               ]);
 
+
+
+        $mailData = [
+            'title' =>"Forgot Password",
+            'body' =>"Are you sure Your Password Remove?",
+            'name'=>"User"
+        ];
+
+        \Illuminate\Support\Facades\Mail::to($request->email)->send(new SendEmail($mailData));
 
 
 
@@ -49,7 +62,7 @@ class ForgotPasswordController extends Controller
 //            $message->subject('Reset Password');
 //        });
 
-        return view('cusAuth.resetpassword',compact('token'));
+      return view('cusAuth.resetpassword',compact('token'));
     }
     /**
      * Write code on Method
@@ -90,6 +103,6 @@ class ForgotPasswordController extends Controller
 
         //DB::table('password_resets')->where(['email'=> $request->email])->delete();
 
-        return redirect('/login')->with('message', 'Your password has been changed!');
+        return redirect()->route('login')->with('message', 'Your password has been changed!');
     }
 }

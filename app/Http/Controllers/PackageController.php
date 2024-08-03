@@ -6,6 +6,7 @@ use App\Models\Hotel;
 use App\Models\Package;
 use App\Http\Requests\StorePackageRequest;
 use App\Http\Requests\UpdatePackageRequest;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,9 @@ class PackageController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
         $aut=Auth::user()->id;
         $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
         $use=$users->type;
@@ -40,6 +44,16 @@ class PackageController extends Controller
     public function store(Request $request)
     {
 
+
+       $request->validate([
+           'name'=>"required",
+           'img'=>"required",
+           'price'=>'required',
+           'hotel'=>'required',
+           'rtype'=>'required',
+           'nop'=>"required",
+           'dec'=>'required'
+       ]);
         $package=new Package();
         $package->name=$request->name;
         if ($image = $request->file('img'))
@@ -63,28 +77,78 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-      return view("admin/staff");
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
+      $packages=Package::all();
+        $aut=Auth::user()->id;
+        $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
+        $use=$users->type;
+
+      return view("admin/staff",compact("packages"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Package $package)
+    public function edit($id)
     {
-        //
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
+        $package=Package::findorfail($id);
+        $hotel=Hotel::all();
+        $room=Room::all();
+        return view("admin/packagedetail",compact("package","hotel","room"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePackageRequest $request, Package $package)
+    public function update(Request $request)
     {
-        //
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
+    $request->validate([
+       "name"=>"required",
+       "img"=>"required",
+       "price"=>"required",
+       "hotel"=>"required",
+        "rtype"=>"required",
+        "nop"=>"required",
+        "dec"=>"required",
+
+    ]);
+
+    $package=Package::findorfail($request->id);
+        if ($image = $request->file('img'))
+        {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $package['img'] = "$profileImage";
+        }
+        $package->name=$request->name;
+        $package->price=$request->price;
+        $package->hotel=$request->hotel;
+        $package->room=$request->rtype;
+        $package->nop=$request->nop;
+        $package->dec=$request->dec;
+        $package->update();
+        return redirect("admin/packagelist");
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
+    public function pdel($id){
+        $package=Package::findorfail($id);
+        $package->delete();
+        return redirect("admin/packagelist");
+    }
+
     public function destroy(Package $package)
     {
         //

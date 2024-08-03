@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
+    <link rel="icon" href="{{asset("data/images/1x/honey_logo-3.png")}}"/><!-- Scrollbar Custom CSS -->
+
     <title>Reset Password</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -31,9 +33,12 @@
     <div class="row">
         <div class="col-12">
             <div class="cotainer">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
+                <div class="row d-flex justify-content-center">
+
+                        <div class="card w-50">
+                            <img src="{{asset('data/images/1x/honey_logo-3.png')}}" class="card-img-top bg-custom" alt="...">
+
+
                             <div class="card-header">Reset Password</div>
                             <div class="card-body">
 
@@ -41,8 +46,8 @@
                                     @csrf
                                     <input type="hidden" name="token" value="{{ $token }}">
 
-                                    <div class="form-group row">
-                                        <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                    <div class="form-group row ">
+                                        <label for="email_address" class="text-dark col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                         <div class="col-md-6">
                                             <input type="text" id="email_address" class="form-control @error("email") is-invalid @enderror" name="email" autofocus>
                                             @error("email")
@@ -53,7 +58,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="password" class="col-md-4 col-form-label text-md-right">New Password</label>
+                                        <label for="password" class="text-dark col-md-4 col-form-label text-md-right">New Password</label>
                                         <div class="col-md-6">
                                             <input type="password" id="password" class="form-control" name="password" autofocus>
                                             @if ($errors->has('password'))
@@ -63,7 +68,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                        <label for="password-confirm" class="text-dark col-md-4 col-form-label text-md-right">Confirm Password</label>
                                         <div class="col-md-6">
                                             <input type="password" id="password-confirm" class="form-control" name="password_confirmation"autofocus>
                                             @if ($errors->has('password_confirmation'))
@@ -73,7 +78,7 @@
                                     </div>
 
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-warning">
                                             Reset Password
                                         </button>
                                     </div>
@@ -81,7 +86,7 @@
 
                             </div>
                         </div>
-                    </div>
+
                 </div>
             </div>
         </div>

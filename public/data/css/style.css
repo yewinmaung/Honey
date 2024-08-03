@@ -211,7 +211,12 @@ button {
      padding-top: 75px;
      padding-bottom: 75px;
 }
-
+.cusactive{
+    background-color: #f9c901;
+}
+.cusactive:hover{
+    background-color: #f9c901;
+}
 .light_silver {
      background: #f9f9f9;
 }
@@ -1090,7 +1095,7 @@ ul.top_icon li a {
      display: block;
      font-weight: 500;
      color: #f9c901;
-     padding: 15px 26px;
+     padding: 15px 15px;
      padding-top: 24px;
 }
 

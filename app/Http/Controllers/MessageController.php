@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendEmail;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -31,16 +34,17 @@ class MessageController extends Controller
     public function store(Request $request)
     {
 
-         $request->validate([
-             "cname"=>"required",
-             "cemail"=>"required",
+        $request->validate([
+            "cname" => "required",
+            "cemail" => "required",
 
-         ]);
-        $complain=new Message();
-        $complain->cname=$request->cname;
-        $complain->cemail=$request->cemail;
-        $complain->cmessage=$request->cmessage;
-        $complain->title=$request->title;
+        ]);
+        $complain = new Message();
+        $complain->cname = $request->cname;
+        $complain->cemail = $request->cemail;
+        $complain->cmessage = $request->cmessage;
+        $complain->title = $request->title;
+        $complain->userid=Auth::user()->id;
         $complain->save();
         return redirect()->back()->withSuccess("Send Message");
 
@@ -51,31 +55,43 @@ class MessageController extends Controller
      */
     public function show(Request $request)
     {
-        $id=$request->id;
-        $detail=DB::select("select * from `messages`where messages.id=:id",['id'=>$id]);
+        $id = $request->id;
+        $detail = DB::select("select * from `messages`where messages.id=:id", ['id' => $id]);
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function reply(Request $message){
-        //$rp=DB::select("select * from `messages` where messages.id=:id",['id'=>$message->id]);
-        $to_email = $message->cemail;
-        $subject = $message->title;
-        $reply=$message->cmessage;
-        //$body = "Hello,nn It is a testing email sent by PHP Script";
-        $headers = "From: sender\'s email";
+    public function reply(Request $request)
+    {
 
-        if (mail($to_email, $subject, $reply, $headers)) {
-            echo "Email successfully sent to $to_email...";
-            return redirect()->route("dashboard")->withSuccess("Sent Succefully...");
-        }
-        else {
-            return redirect()->back()->withSuccess("error");
+        $request->validate([
+            'title' => 'required',
+            'email' => 'required|email',
+            'message' => 'required',
+            'name'=>"required"
+        ]);
+
+        try {
+            // send email
+            $mailData = [
+                'title' => $request->title,
+                'body' => $request->message,
+                'name'=>$request->name
+                ];
+
+            Mail::to($request->email)->send(new SendEmail($mailData));
+            $message=Message::findorfail($request->id);
+            $message->type="1";
+            $message->update();
+            return redirect('admin/report')->with('success','email was sent to successfully!');
+        } catch (\Exception $e) {
+            return redirect('admin/message/'.$request->id)->with('error', $e->getMessage());
         }
 
     }
+
     public function edit(Message $message)
     {
         //

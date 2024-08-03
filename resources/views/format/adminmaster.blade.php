@@ -44,58 +44,14 @@
              <span class="list-group-item disabled d-none d-lg-block">
                   <small>CONTROLS</small>
                     </span>
-
-                        <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action">
-                            <i class="fa fa-home text-custom"></i>
-                            <span class="d-none d-lg-inline">Dashboard</span>
-                        </a>
-
-                     <a href="{{route('book-user')}}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-users text-custom"></i>
-                        <span class="d-none d-lg-inline">Booking Users</span>
-                       @yield('bookU')
-                        </a>
-                    <a href="{{route('plist')}}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-line-chart text-custom"></i>
-                        <span class="d-none d-lg-inline">Packages</span>
-                    </a>
-
-                        <a href="{{route('admin-user-report')}}" class="list-group-item list-group-item-action">
-                            <i class="fa fa-flag text-custom"></i>
-                            <span class="d-none d-lg-inline">Reports</span>
-                        </a>
-
-
+                    @yield("controls")
                 </div>
                 <div class="list-group mt-4 text-center text-lg-left px-3">
                     <span class="list-group-item disabled d-none d-lg-block">
                      <small>ACTIONS</small>
                      </span>
-
-                        <a href="{{route('admin-user-upload')}}" class="list-group-item list-group-item-action">
-                            <i class="fa fa-user text-custom"></i>
-                            <span class="d-none d-lg-inline">New Book User</span>
-                        </a>
-                    <a href="{{route('gust')}}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-edit text-custom"></i>
-                        <span class="d-none d-lg-inline">Hotel and RoomType</span>
-                    </a>
-                    <a href="{{route('addtown')}}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-edit text-custom"></i>
-                        <span class="d-none d-lg-inline">Hotel Info</span>
-                    </a>
-
-                        <a href="{{route('staff-reg')}}" class="list-group-item list-group-item-action">
-                            <i class="fa fa-edit text-custom"></i>
-                            <span class="d-none d-lg-inline">Create Trip</span>
-                        </a>
-
-
-                    <a href="{{route("adminprofile")}}" class="list-group-item list-group-item-action">
-                        <i class="fa fa-edit text-custom"></i>
-                        <span class="d-none d-lg-inline">Profile</span>
-                    </a>
-                </div>
+                    @yield(("actions"))
+                 </div>
             </nav>
             <main class="col-10 bg-custom50">
                 <nav class="navbar navbar-expand-lg navbar-light bg-custom">
@@ -118,15 +74,21 @@
                             </li>
                         @else
                             <li class="nav-item">
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle text-custom1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                        {{\Illuminate\Support\Facades\Auth::user()->name}}
-                                    </a>
+                                <div class="d-flex">
+                                    <img src="{{asset("images/".Auth::user()->img)}}" class="" style="width: 50px;height: 50px;border-radius: 50%">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="dropdown">
 
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item log" href="{{route("adminprofile")}}">Profile</a>
-                                        <a class="dropdown-item log" href="{{ route('admin-logout') }}">Logout</a></div>
+                                            <a class="dropdown-toggle text-custom1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                                {{\Illuminate\Support\Facades\Auth::user()->name}}
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item log" href="{{route("adminprofile")}}">Profile</a>
+                                                <a class="dropdown-item log" href="{{ route('admin-logout') }}">Logout</a></div>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </li>
                         @endguest
                     </div>

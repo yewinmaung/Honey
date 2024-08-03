@@ -12,17 +12,18 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get("/",[\App\Http\Controllers\BookController::class,"index"])->name("home");
 
-Route::get('/', function () {
-    return view('welcome');
-})->name("home");
+//Route::get('/', function () {
+//    return view('welcome');
+//})->name("home");
 
 //Admin
 Route::get('admin',[\App\Http\Controllers\AdminPanelController::class,'forAdminformat'])->name('adminmaster');
 Route::get("admin/dashboard",[\App\Http\Controllers\AdminPanelController::class,'index'])->name("dashboard");
 Route::get('admin/upload',[\App\Http\Controllers\AdminPanelController::class,'create'])->name('admin-upload');
 Route::post('admin/apply',[\App\Http\Controllers\AdminPanelController::class,'store'])->name('admin-apply');
-Route::get('admin/user-upload',[\App\Http\Controllers\AdminPanelController::class,'upload'])->name('admin-user-upload');
+Route::get('admin/MBooking',[\App\Http\Controllers\AdminPanelController::class,'upload'])->name('abook');
 Route::get('admin/report',[\App\Http\Controllers\AdminPanelController::class,'report'])->name('admin-user-report');
 Route::get('admin/staffaccount',[\App\Http\Controllers\AdminPanelController::class,'staffAccount'])->name('staff-account');
 Route::post("admin/reply",[\App\Http\Controllers\MessageController::class,'reply'])->name("reply");
@@ -36,7 +37,7 @@ Route::get('admin/staffinformation/{id}',[\App\Http\Controllers\AdminPanelContro
 Route::put('admin/staff/update/{id}',[\App\Http\Controllers\AdminPanelController::class,'update'])->name('staff-update');
 Route::delete('admin/staffinformation/delete/{id}',[\App\Http\Controllers\AdminPanelController::class,'destroy'])->name('staff-delete');
 
-Route::get("admin/message-detail/{id}",[\App\Http\Controllers\AdminPanelController::class,'reportdetail'])->name('admin-message');
+Route::get("admin/message/{id}",[\App\Http\Controllers\AdminPanelController::class,'reportdetail'])->name('admin-message');
 Route::post('admin/adminbook',[\App\Http\Controllers\AdminPanelController::class,'adminbooking'])->name('admin-book');
 Route::get('admin/bookUser',[\App\Http\Controllers\AdminPanelController::class,'bookingUser'])->name('book-user');//
 Route::post('admin/search',[\App\Http\Controllers\SearchController::class,'search'])->name('admin-actionsearch');
@@ -53,8 +54,16 @@ Route::get("admin/hoteledit/{id}",[\App\Http\Controllers\TownController::class,"
 Route::post("admin/hotelupdate",[\App\Http\Controllers\TownController::class,"update"])->name("hupdate");
 Route::get("admin/gust",[\App\Http\Controllers\TownController::class,"gust"])->name("gust");
 Route::post("admin/gust",[\App\Http\Controllers\TownController::class,"gustInfo"])->name("gustInfo");
+Route::delete("admin/gust/{id}",[\App\Http\Controllers\TownController::class,'hotdel'])->name("hot");
+Route::get("admin/room",[\App\Http\Controllers\TownController::class,"gustroom"])->name("gust-room");
 Route::post("admin/room",[\App\Http\Controllers\TownController::class,"room"])->name("room");
 Route::delete("admin/roomdel/{id}",[\App\Http\Controllers\TownController::class,"rdel"])->name("rdel");
+Route::delete("admin/pdel/{id}",[\App\Http\Controllers\PackageController::class,"pdel"])->name("pdel");
+Route::get("admin/restaurant",[\App\Http\Controllers\RestaurantController::class,"index"])->name("restau");
+Route::post("admin/restaurant",[\App\Http\Controllers\RestaurantController::class,"store"])->name("urestau");
+Route::get("admin/edit/restraurant/{id}",[\App\Http\Controllers\RestaurantController::class,"edit"])->name("erestau");
+Route::post("admin/update/restaurant",[\App\Http\Controllers\RestaurantController::class,"update"])->name("urest");
+Route::delete("admin/delete/restaurant/{id}",[\App\Http\Controllers\RestaurantController::class,'destroy'])->name("rdel");
 //EndAdmin
 //Authentication
 Route::get('homeView',[\App\Http\Controllers\CustonAuthController::class,'homeView'])->name('homeView');
@@ -69,17 +78,23 @@ Route::post('admin/cus/login',[\App\Http\Controllers\AdminAuthController::class,
 Route::get('admin/packages',[\App\Http\Controllers\PackageController::class,'index'])->name('staff-reg');
 Route::post('admin/packages',[\App\Http\Controllers\PackageController::class,"store"])->name('package');
 Route::get("admin/packagelist",[\App\Http\Controllers\PackageController::class,'show'])->name("plist");
-Route::get("admin/addtown",[\App\Http\Controllers\TownController::class,"index"])->name("addtown");
+Route::get("admin/package/{id}",[\App\Http\Controllers\PackageController::class,"edit"])->name("pacedit");
+Route::post("admin/Updatepackage",[\App\Http\Controllers\PackageController::class,"update"])->name("upackage");
+Route::get("admin/hotelinfo",[\App\Http\Controllers\TownController::class,"index"])->name("addtown");
+Route::post("admin/blog",[\App\Http\Controllers\BookController::class,"blog"])->name("blog");
+Route::delete("admin/postdel/{id}",[\App\Http\Controllers\BookController::class,"postdelete"])->name("postdel");
+Route::get("admin/postedit/{id}",[\App\Http\Controllers\BookController::class,"pedit"])->name("pedit");
+Route::post("adim/postupdate",[\App\Http\Controllers\BookController::class,"pupdate"])->name("pupdate");
 Route::get('admin/signout',[\App\Http\Controllers\AdminAuthController::class,'signout'])->name('admin-logout');
+
 //end Authentication
 Route::post("user/booking",[\App\Http\Controllers\BookController::class,"store"])->name("user.store");
-Route::get("user/booknow",[\App\Http\Controllers\BookController::class,"create"])->name("user.booknow");
+Route::get("user/booknow/{id}",[\App\Http\Controllers\BookController::class,"create"])->name("user.booknow");
 Route::get("user/booking/confirm",[\App\Http\Controllers\BookController::class,"show"])->name("user.ticket");
 Route::delete("user/booking/cancel/{id}",[\App\Http\Controllers\BookController::class,"destroy"])->name("book.cancel");
-Route::get("honey/trip",function (){
-    return view('user.bagan');
-})->name('trip-package');
+Route::get("honey/trip",[\App\Http\Controllers\BookController::class,"trip"])->name('trip-package');
 Route::post("user/review",[\App\Http\Controllers\MessageController::class,'store'])->name('message.review');
+Route::get("user/spackage",[\App\Http\Controllers\BookController::class,"edit"])->name("spackage");
 ///////////////
 Route::get('forget-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 Route::post('forget-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');

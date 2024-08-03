@@ -36,13 +36,16 @@ class SearchController extends Controller
         $aut=Auth::user()->id;
         $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
         $use=$users->type;
-         if($request){
+
+         if($request->search){
              $search_text=$request->search;
              $books=Book::where('nic','Like',"%".$search_text."%")->get();
-             return view('admin.booking',compact('books',"bookU",'use'))->with("Found");
+             // return redirect()->route("book-user");
+             return view('admin.booking',compact("bookU",'use'),["books"=>Book::where('nic','Like',"%".$search_text."%")->paginate(1)])->with("Found");
+
          }
          else{
-             return view('admin.booking',['books'=>Book::all()],compact("bookU",'use'));
+            return redirect()->route("book-user");
          }
        }
        public function staffaccsearch(Request $request){

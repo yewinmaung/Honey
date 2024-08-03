@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
+    <link rel="icon" href="{{asset("data/images/1x/honey_logo-3.png")}}"/><!-- Scrollbar Custom CSS -->
+
     <title>Forgot Password</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -46,12 +48,14 @@
                                 <form action="{{ route('forget.password.post') }}" method="POST">
                                     @csrf
                                     <div class="form-group row">
-                                        <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-                                        <div class="col-md-6">
-                                            <input type="text" id="email_address" class="form-control" name="email" autofocus>
-                                            @if ($errors->has('email'))
-                                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                                            @endif
+                                       <div class="col-md-12">
+                                            <div class="form-group mb-3">
+                                                <input type="text" placeholder="Email" id="email" class="form-control @error("email") is-invalid @enderror" name="email"
+                                                       autofocus>
+                                                @error("email")
+                                                <div class="text-danger invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
                                         <div class="d-flex justify-content-end">

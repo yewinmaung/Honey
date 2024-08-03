@@ -21,8 +21,7 @@
     <!-- Responsive-->
     <link rel="stylesheet" href="{{asset("data/css/responsive.css")}}">
     <!-- fevicon -->
-    <link rel="icon" href="{{asset("data/images/fevicon.png")}}" type="image/gif" />
-    <!-- Scrollbar Custom CSS -->
+    <link rel="icon" href="{{asset("data/images/1x/honey_logo-3.png")}}"/><!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="{{asset("data/css/jquery.mCustomScrollbar.min.css")}}">
     <!-- Tweaks for older IEs-->
     <!-- owl stylesheets -->
@@ -45,7 +44,7 @@
                             <ul>
                                 <li><img src="{{asset("data/images/1.png")}}" alt="#"/> Burma</li>
                                 <li><img src="{{asset("data/images/2.png")}}" alt="#"/> +959 767381581</li>
-                                <li><img src="{{asset("data/images/3.png")}}" alt="#"/> admin@honey.mailenable.com.mm</li>
+                                <li><img src="{{asset("data/images/3.png")}}" alt="#"/> honeytravellingagency6@gmail.com</li>
                             </ul>
                         </div>
                     </div>
@@ -85,14 +84,18 @@
                                         </li>
                                     @else
                                         <li class="nav-item">
-                                            <div class="dropdown">
-                                                <a class=" dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                                    {{\Illuminate\Support\Facades\Auth::user()->name}}
-                                                </a>
+                                            <div class="d-flex">
+                                                <div class="dropdown">
+                                                    <a class=" dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                                        {{\Illuminate\Support\Facades\Auth::user()->name}}
+                                                    </a>
 
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item log" href="{{ route('user.ticket') }}">Profile</a>
-                                                    <a class="dropdown-item log" href="{{ route('signout') }}">Logout</a></div>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item log" href="{{ route('user.ticket') }}">Profile</a>
+                                                        <a class="dropdown-item log" href="{{ route('signout') }}">Logout</a></div>
+                                                </div>
+                                                <img src="{{asset("images/".Auth::user()->img)}}" class="p-1" style="width: 60px;height: 60px;border-radius: 50%">
+
                                             </div>
                                         </li>
                                     @endguest
@@ -117,8 +120,12 @@
 <script src="{{asset("data/js/plugin.js")}}"></script>
 <!-- sidebar -->
 <script src="{{asset("data/js/jquery.mCustomScrollbar.concat.min.js")}}"></script>
+<script src="{{asset("data/js/slick.js")}}"></script>
 <script src="{{asset("data/js/custom.js")}}"></script>
 <!-- javascript -->
 <script src="{{asset("data/js/owl.carousel.js")}}"></script>
+<script>
+
+</script>
 </body>
 </html>

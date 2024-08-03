@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{asset('data/css/admin.css')}}">
     <link rel="stylesheet" href="{{asset('data/css/font-awesome.min.css')}}">
     <!-- style css -->
+    <link rel="icon" href="{{asset("data/images/1x/honey_logo-3.png")}}"/><!-- Scrollbar Custom CSS -->
 
     <link rel="stylesheet" href="{{asset("data/css/style.css")}}">
     <!-- Responsive-->

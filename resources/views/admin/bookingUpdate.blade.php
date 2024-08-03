@@ -2,6 +2,58 @@
 @section("title")
     Update Booking
 @endsection
+@section("controls")
+    <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-home text-custom"></i>
+        <span class="d-none d-lg-inline">Dashboard</span>
+    </a>
+    <a href="{{route('book-user')}}" class="list-group-item list-group-item-action cusactive">
+        <i class="fa fa-users text-custom"></i>
+        <span class="d-none d-lg-inline">Booking Lists</span>
+        @yield('bookU')
+    </a>
+    <a href="{{route('plist')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-line-chart text-custom"></i>
+        <span class="d-none d-lg-inline">Packages</span>
+    </a>
+    <a href="{{route('admin-user-report')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-flag text-custom"></i>
+        <span class="d-none d-lg-inline">Reports</span>
+    </a>
+
+@endsection
+@section("actions")
+    <a href="{{route('abook')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-user text-custom"></i>
+        <span class="d-none d-lg-inline">New Book User</span>
+    </a>
+    <a href="{{route('gust')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-hotel text-custom"></i>
+        <span class="d-none d-lg-inline">New Hotel</span>
+    </a>
+    <a href="{{route('gust-room')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-tag text-custom"></i>
+        <span class="d-none d-lg-inline">Room Types</span>
+    </a>
+    <a href="{{route('addtown')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-table text-custom"></i>
+        <span class="d-none d-lg-inline">Hotel Info</span>
+    </a>
+    <a href="{{route('restau')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-hand-spock-o h1 text-col1 text-custom"></i>
+
+        <span class="d-none d-lg-inline">Restaurants</span>
+    </a>
+    <a href="{{route('staff-reg')}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-location-arrow text-custom"></i>
+        <span class="d-none d-lg-inline">Create Trip</span>
+    </a>
+    <a href="{{route("adminprofile")}}" class="list-group-item list-group-item-action">
+        <i class="fa fa-edit text-custom"></i>
+        <span class="d-none d-lg-inline">Profile</span>
+    </a>
+
+@endsection
 @section('breadcamp')
     <ol class="breadcrumb w-100">
         <li class="breadcrumb-item"><a href="{{route("book-user")}}" class="owncol">Back</a></li>
@@ -67,33 +119,28 @@
                                                    @enderror
                                                </div>
                                            </div>
+                                           <div class="col-6">
+                                               <div class="form-group">
+                                                   <input type="text" value="{{$book->location}}" name="splace" class="custom-select @error("splace") is-invalid @enderror" placeholder="Location">
+                                                   @error("location")
+                                                   <p class="text-danger invalid-feedback">{{$message}}</p>
+                                                   @enderror
+                                               </div>
+                                           </div>
                                        </div>
                                        <div class="row">
                                            <div class="col-3">
                                                <select class="custom-select @error("package") is-invalid @enderror" name="package" >
-                                                   <option selected disabled >{{$book->package}}</option>
-                                                   <option class="cus-select"  value="holiday">Holiday Trip </option>
-                                                   <option class="cus-select" value="honeymoon">HoneyMoon Trip </option>
-                                                   <option class="cus-select" value="family">Family Trip </option>
-                                               </select>
+                                                  @foreach($packages as $p)
+                                                   <option value="{{$p->name}}" {{$book->package===$p->name ?'selected':""}}>{{$p->name}}</option>
+                                                   @endforeach
+                                                   </select>
 
                                                @error("package")
                                                <div class="text-danger invalid-feedback">{{$message}}</div>
                                                @enderror
                                            </div>
-                                           <div class="col-3">
-                                               <select class="custom-select @error("trip") is-invalid @enderror" name="trip" >
-                                                   <option selected disabled>{{$book->trip}}</option>
-                                                   <option class="cus-select"  value="Bagan">Bagan </option>
-                                                   <option class="cus-select" value="Dawei">Dawei</option>
-                                                   <option class="cus-select" value="NgaPali">NgaPali</option>
-                                                   <option class="cus-select" value="MyitKyiNa">MyitKyiNa</option>
-                                               </select>
 
-                                               @error("trip")
-                                               <div class="text-danger invalid-feedback">{{$message}}</div>
-                                               @enderror
-                                           </div>
                                            <div class="col-3">
                                                <div class="form-group">
                                                    <input type="date" value="{{$book->date}}" id="v_name" name="date" class="custom-select  @error("date") is-invalid @enderror">
@@ -109,56 +156,7 @@
                                                </select>
                                            </div>
                                        </div>
-                                       <div class="row">
-                                           <div class="col-4">
-                                               <select class="custom-select @error("hour") is-invalid @enderror" name="hour" >
-                                                   <option class="cus-select" selected disabled>{{$book->hour}}</option>
-                                                   <option class="cus-select"  value="1">1</option>
-                                                   <option class="cus-select"  value="2">2</option>
-                                                   <option class="cus-select"  value="3">3</option>
-                                                   <option class="cus-select"  value="4">4</option>
-                                                   <option class="cus-select"  value="5">5</option>
-                                                   <option class="cus-select"  value="6">6</option>
-                                                   <option class="cus-select"  value="7">7</option>
-                                                   <option class="cus-select"  value="8">8</option>
-                                                   <option class="cus-select"  value="9">9</option>
-                                                   <option class="cus-select"  value="10">10</option>
-                                                   <option class="cus-select"  value="11">11</option>
-                                                   <option class="cus-select"  value="12">12</option>
-                                               </select>
-                                           </div>
-                                           <div class="col-4">
-                                               <select class="custom-select @error("minute") is-invalid @enderror" name="minute" >
-                                                   <option value="" selected disabled class="cus-select">{{$book->minute}}</option>
-                                                   <option class="cus-select"  value=":10:">10</option>
-                                                   <option class="cus-select"  value=":15:">15</option>
-                                                   <option class="cus-select"  value=":20:">20</option>
-                                                   <option class="cus-select"  value=":25:">25</option>
-                                                   <option class="cus-select"  value=":30:">30</option>
-                                                   <option class="cus-select"  value=":35:">35</option>
-                                                   <option class="cus-select"  value=":40:">40</option>
-                                                   <option class="cus-select"  value=":45:">45</option>
-                                                   <option class="cus-select"  value=":50:">50</option>
-                                                   <option class="cus-select"  value=":55:">55</option>
-                                                   <option class="cus-select"  value=":00:">00</option>
 
-                                               </select>
-                                               @error("minute")
-                                               <div class="text-danger invalid-feedback">{{$message}}</div>
-                                               @enderror
-                                           </div>
-                                           <div class="col-4">
-                                               <select class="custom-select @error("dp") is-invalid @enderror" name="dp" >
-                                                   <option selected disabled >{{$book->am_or_pm}}</option>
-                                                   <option class="cus-select"  value="AM">AM</option>
-                                                   <option class="cus-select" value="PM">PM</option>
-                                               </select>
-
-                                               @error("dp")
-                                               <div class="text-danger invalid-feedback">{{$message}}</div>
-                                               @enderror
-                                           </div>
-                                       </div>
                                        <div class="row">
                                            <div class="col-12 traveling-box">
                                                <div class="read-more">

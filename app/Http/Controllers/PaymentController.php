@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -46,12 +47,18 @@ class PaymentController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {   $book=Book::findorfail($id);
+
+    {
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
+        $book=Book::findorfail($id);
         $aut=Auth::user()->id;
         $users=User::findorfail($aut);
         $use=$users->type;
         $bookU=Book::count();
-       return view('admin.bookingUpdate',compact('bookU','book','use'));
+        $packages=Package::all();
+       return view('admin.bookingUpdate',compact('bookU','book','use','packages'));
     }
 
     /**
@@ -59,42 +66,38 @@ class PaymentController extends Controller
      */
     public function update(Request $request,$id)
     {
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
         $request->validate([
             "name"=>"required",
             "nic"=>"required|unique:books,nic,$id",
             "email"=>"required|unique:books,email,$id",
             "nop"=>"required",
-            "trip"=>"required",
+            "splace"=>"required",
             "package"=>"required",
             "phone"=>"required|gte:14",
             "date"=>"required",
-            "hour"=>"required",
-            "dp"=>"required",
-            "minute"=>"required",
             "paym"=>"required",
 
         ]);
+
         $book=Book::findorfail($id);
         $book->name=$request->name;
         $book->nic=$request->nic;
         $book->email=$request->email;
         $book->nop=$request->nop;
         $book->date=$request->date;
-        $book->hour=$request->hour;
-        $book->minute=$request->minute;
-        $book->am_or_pm=$request->dp;
-        $book->trip=$request->trip;
+        $book->location=$request->splace;
         $book->package=$request->package;
         $book->phone=$request->phone;
         $book->isclear=$request->paym;
-        $book->admins_id=Auth::user()->id;
+        $aut=Auth::user()->id;
+
+        $book->admins_id=$aut;
         $book->admins_name=Auth::user()->name;
         $book->update();
-
-        $aut=Auth::user()->id;
-        $users=User::findorfail($aut);
-        $use=$users->type;
-        return redirect()->route('book-user',compact('use'));
+        return redirect()->route('book-user');
     }
 
     /**

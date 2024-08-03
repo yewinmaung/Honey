@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Eforlad travel</title>
+    <title>Honey Travelling Agency</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -20,8 +20,7 @@
     <!-- Responsive-->
     <link rel="stylesheet" href="{{asset("data/css/responsive.css")}}">
     <!-- fevicon -->
-    <link rel="icon" href="{{asset("data/images/fevicon.png")}}" type="image/gif" />
-    <!-- Scrollbar Custom CSS -->
+    <link rel="icon" href="{{asset("data/images/1x/honey_logo-3.png")}}"/><!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="{{asset("data/css/jquery.mCustomScrollbar.min.css")}}">
     <!-- Tweaks for older IEs-->
     <!-- owl stylesheets -->
@@ -51,8 +50,8 @@
                         <div class="header_information">
                             <ul>
                                 <li><img src="{{asset("data/images/1.png")}}" alt="#"/> Burma</li>
-                                <li><img src="{{asset("data/images/2.png")}}" alt="#"/> +959 767381581</li>
-                                <li><img src="{{asset("data/images/3.png")}}" alt="#"/> admin@honey.mailenable.com.mm</li>
+                                <li><img src="{{asset("data/images/2.png")}}" alt="#"/> +959 686 959 500</li>
+                                <li><img src="{{asset("data/images/3.png")}}" alt="#"/> honeytravellingagency6@gmail.com</li>
                             </ul>
                         </div>
                     </div>
@@ -76,7 +75,7 @@
                                     <li class=""> <a href="{{route("home")}}">Home</a> </li>
                                     <li> <a href="#about">About</a> </li>
                                     <li><a href="#travel">Travel</a></li>
-                                    <li><a href="#blog">Blog</a></li>
+                                    <li><a href="{{route("trip-package")}}">Interest Places</a></li>
                                     <li><a href="#contact">Contact Us</a></li>
                                     {{--Login/Logout--}}
                                     @guest
@@ -95,15 +94,19 @@
                                         </li>
                                     @else
                                         <li class="nav-item">
-                                            <div class="dropdown">
-                                                <a class=" dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                          <div class="d-flex justify-content-center align-items-center">
+                                             <div class="dropdown">
+                                                  <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                                     {{\Illuminate\Support\Facades\Auth::user()->name}}
-                                                </a>
+                                                  </a>
 
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item log" href="{{ route('user.ticket') }}">Profile</a>
-                                                    <a class="dropdown-item log" href="{{ route('signout') }}">Logout</a></div>
-                                            </div>
+                                                  <div class="dropdown-menu">
+                                                      <a class="dropdown-item log" href="{{ route('user.ticket') }}">Profile</a>
+                                                      <a class="dropdown-item log" href="{{ route('signout') }}">Logout</a></div>
+                                              </div>
+                                              <img src="{{asset("images/".Auth::user()->img)}}" class="p-2" style="width: 50px;height: 50px;border-radius: 50%">
+
+                                          </div>
                                         </li>
                                     @endguest
                                     {{--end Login/Logout--}}
@@ -168,29 +171,25 @@
                             </div>
                         </div>
                         <div class="col-6 pb-2">
+                            <label for="" class="text-white">Packages</label>
                             <select class="custom-select @error("package") is-invalid @enderror" name="package" >
-                                <option selected disabled >Select Package</option>
-                                <option class="cus-select"  value="holiday">Holiday Trip </option>
-                                <option class="cus-select" value="honeymoon">HoneyMoon Trip </option>
-                                <option class="cus-select" value="family">Family Trip </option>
+                                @foreach($package as $p)
+                                    <option class="cus-select" value="{{$p->name}}">{{$p->name}}</option>
+                                @endforeach
                             </select>
 
                             @error("package")
                             <div class="text-danger invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-6 pb-3">
-                            <select class="custom-select @error("trip") is-invalid @enderror" name="trip" >
-                                <option selected disabled >Select Trip</option>
-                                <option class="cus-select"  value="bagan">Bagan </option>
-                                <option class="cus-select" value="dawei">Dawei</option>
-                                <option class="cus-select" value="ngapali">NgaPali</option>
-                                <option class="cus-select" value="myitkyina">MyitKyiNa</option>
-                            </select>
-
-                            @error("trip")
-                            <div class="text-danger invalid-feedback">{{$message}}</div>
-                            @enderror
+                        <div class="col-6">
+                            <label for="" class="text-white">Address</label>
+                            <div class="form-group">
+                                <input type="text" value="" name="splace" class="form-control @error("splace") is-invalid @enderror" placeholder="Location">
+                                @error("splace")
+                                <p class="text-danger invalid-feedback">{{$message}}</p>
+                                @enderror
+                            </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -208,11 +207,24 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rb" id="inlineRadio1" value="Male">
+                                <label class="form-check-label" for="inlineRadio1">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rb" id="inlineRadio2" value="Female">
+                                <label class="form-check-label" for="inlineRadio2">Female</label>
+                            </div>
+                        </div>
                     </div>
+
+
                     <div class="row">
                         <div class="col-12 traveling-box">
                             <div class="read-more">
-                                <button type="submit" class="read-more">Booking Now</button>
+                                <button type="reset" class="read-more">Cancel</button>
+                                <button type="submit" class="read-more">Booking</button>
                             </div>
                         </div>
                     </div>
@@ -248,7 +260,7 @@
                 </div>
             </div>
         </div>
-        <a href="#">Read More</a>
+
     </div>
 </div>
 <!-- end about -->
@@ -264,42 +276,25 @@
             </div>
         </div>
         <div class="row">
+            @foreach($package as $p)
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                <div class="traveling-box">
-                    <i><img src="{{asset("data/icon/travel-icon.png")}}" alt="icon"/></i>
-                    <h3>Holiday Trip</h3>
+                <div class="traveling-box card p-2">
+                    <i><img src="{{asset("images/$p->img")}}" alt="icon" width="100px;"/></i>
+                    <h3>{{$p->name}}</h3>
                     <p> going to use a passage of Lorem Ipsum, you need to be </p>
                     <div class="text-custom">
-                       <p class="text-custom font-weight-bold"> 250000 ks</p>
-                        <p class="font-italic">For 2 People</p>
-                        <i class="">If More People Extra Price (30000 per) Take.</i>
+                       <p class="text-custom font-weight-bold"> {{$p->price}} ks</p>
+                        <p class="font-italic">{{$p->hotel}} Hotel</p>
+                        <p class="font-italic">Room {{$p->room}} Type</p>
+                        <p class="font-italic">For {{$p->nop}} People</p>
+                        <i class="">{{$p->dec}}</i>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <a href="{{route("user.booknow",$p->id)}}" class="btn btn-warning">Select</a>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                <div class="traveling-box">
-                    <i><img src="{{asset("data/icon/travel-icon3.png")}}" alt="icon"/></i>
-                    <h3>Family Trip</h3>
-                    <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                    <div class="text-custom">
-                        <p class="text-custom font-weight-bold"> 600000 ks</p>
-                        <p class="font-italic">For 5 People</p>
-                        <i class="">If More People Extra Price (10000 per) Take.</i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                <div class="traveling-box">
-                    <i><img src="{{asset("data/icon/travel-icon4.png")}}" alt="icon"/></i>
-                    <h3>Honey Moon Trip</h3>
-                    <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                    <div class="text-custom">
-                        <p class="text-custom font-weight-bold"> 500000 ks</p>
-                        <p class="font-italic">For 2 People</p>
-
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -354,40 +349,39 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="titlepage">
-                    <h2>Our Blog</h2>
+                    <h2>Reviews</h2>
                     <span>Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <div class="blog-box">
-                    <figure><img src="{{asset("data/images/blog-image0.jpg")}}" alt="#"/>
-                        <span>4 Feb 2019</span>
-                    </figure>
-                    <div class="travel">
-                        <span>Post  By :  Travel  Agency</span>
-                        <p><strong class="Comment"> 06 </strong>  Comment</p>
-                        <p><strong class="like">05 </strong>Like</p>
+            @foreach($blog as $b)
+            <div class="col-md-4 col-sm-12">
+                <div class="card" style="width: 100%;">
+                    <img src="{{asset("images/".$b->img)}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h3 class="card-title">{{$b->title}}</h3>
+                        <p class="card-text">{{$b->dec}}</p>
+                        <small class="d-flex justify-content-end">{{$b->updated_at}}</small>
                     </div>
-                    <h3>London Amazing Tour</h3>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <div class="blog-box">
-                    <figure><img src="{{asset("data/images/blog-image.jpg")}}" alt="#"/>
-                        <span>10 Feb 2019</span>
-                    </figure>
-                    <div class="travel">
-                        <span>Post  By :  Travel  Agency</span>
-                        <p><strong class="Comment"> 06 </strong>  Comment</p>
-                        <p><strong class="like">05 </strong>Like</p>
-                    </div>
-                    <h3>London Amazing Tour</h3>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
-                </div>
-            </div>
+            @endforeach
+            {{$blog->links()}}
+{{--            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">--}}
+{{--                <div class="blog-box">--}}
+{{--                    <figure><img src="{{asset("data/images/blog-image.jpg")}}" alt="#"/>--}}
+{{--                        <span>10 Feb 2019</span>--}}
+{{--                    </figure>--}}
+{{--                    <div class="travel">--}}
+{{--                        <span>Post  By :  Travel  Agency</span>--}}
+{{--                        <p><strong class="Comment"> 06 </strong>  Comment</p>--}}
+{{--                        <p><strong class="like">05 </strong>Like</p>--}}
+{{--                    </div>--}}
+{{--                    <h3>London Amazing Tour</h3>--}}
+{{--                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </div>
 </div>
@@ -408,9 +402,9 @@
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="Follow">
                         <h3>CONTACT US</h3>
-                        <span>UCSL <br>Loikaw<br>
+                        <span>UCSP <br>Pyay<br>
                         BURMA<br>
-                        +959 767381581</span>
+                        +959 686959500</span>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
@@ -448,10 +442,10 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
 
-                                            <input type="text" name="title" class="Newsletter form-control @error("title") is-invalid @enderror" placeholder="E-mail">
+                                            <input type="text" name="title" class="Newsletter form-control @error("title") is-invalid @enderror" placeholder="Title">
                                             @error("title")
                                             <p class="text-danger invalid-feedback">{{$message}}</p>
                                             @enderror
@@ -460,7 +454,7 @@
                                     </div>
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
-                                            <textarea class="textarea form-control @error("cmessage")is-invalid @enderror" name="cmessage"  placeholder="comment" type="text" >Comment</textarea>
+                                            <textarea class="textarea form-control @error("cmessage")is-invalid @enderror" name="cmessage"  placeholder="Comment" type="text" ></textarea>
                                             @error("cmesage")
                                             <p class="text-danger invalid-feedback">{{$message}}</p>
                                             @enderror
@@ -476,7 +470,7 @@
             </div>
             <div class="copyright">
                 <div class="container">
-                    <p>Copyright &copy; 2023   <small>created By Team 3</small></p>
+                    <p>Copyright &copy; 2024   <small>created By KC</small></p>
 
                 </div>
             </div>

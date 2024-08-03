@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 
+use App\Models\Blog;
 use App\Models\Book;
+use App\Models\Hotel;
 use App\Models\Message;
+use App\Models\Package;
+use App\Models\Post;
+use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -21,23 +26,29 @@ class AdminPanelController extends Controller
      */
     public function index()
     {
-        $admins=Admin::paginate(5);
-        $admin_count=Admin::count();
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
+
+
         $bookU=Book::count();
         $IU=User::count();
         $rep=Message::count();
-        $aut=Auth::user()->id;
-        $users=User::findorfail($aut);
-        $use=$users->type;
+        $hotel=Hotel::count();
+        $res=Restaurant::count();
 
-         return view('admin.dashboard',compact('rep',"use",'admins','admin_count','IU',"bookU"));
+         return view('admin.dashboard',compact('rep','IU',"bookU",'hotel','res'),["blog"=>Post::paginate(5)]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {   $aut=Auth::user()->id;
+    {
+        if (!Auth::user()){
+        return redirect("admin/login");
+        }
+        $aut=Auth::user()->id;
         $users=User::findorfail($aut);
         $use=$users->type;
         $bookU=Book::count();
@@ -51,7 +62,9 @@ class AdminPanelController extends Controller
 
     public function store(Request $request)
     {
-
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
         $request->validate([
             'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             "sname"=>"required",
@@ -145,6 +158,9 @@ public function adminProfileProcess(Request $request){
      */
     public function update(Request $request,$id)
     {
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
 
         $request->validate([
             'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
@@ -193,11 +209,15 @@ public function adminProfileProcess(Request $request){
       return redirect()->back();
     }
     public function upload(){
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
         $aut=Auth::user()->id;
         $users=User::findorfail($aut);
         $use=$users->type;
         $bookU=Book::count();
-        return view('admin.adminadduser',compact('bookU','use'));
+        $package=Package::all();
+        return view('admin.adminadduser',compact('bookU','use',"package"));
     }
     public function report(Message $messages){
 
@@ -205,38 +225,45 @@ public function adminProfileProcess(Request $request){
         $users=User::findorfail($aut);
         $use=$users->type;
         $bookU=Book::count();
-        return view('admin.report',["messages"=>Message:: all()],compact('bookU','use'));
+        return view('admin.report',["messages"=>Message::paginate(10)],compact('bookU','use'));
     }
-    public function reportdetail(Request $request){
+    public function reportdetail($id){
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
         $aut=Auth::user()->id;
         $users=User::findorfail($aut);
         $use=$users->type;
-       return view('admin.reportdetail',['messages'=>Message::all()],compact('use'));
+        $message=Message::findorfail($id);
+       return view('admin.reportdetail',compact('use','message'));
     }
     public function bookingUser(){
+        if (!Auth::user()){
+            return redirect("admin/login");
+        }
         $aut=Auth::user()->id;
         $users=User::findorfail($aut);
         $use=$users->type;
         $books=Book::paginate(5);
         $bookU=Book::count();
 
-        return view('admin.booking',compact('books','bookU','use'));
+        return view('admin.booking',compact('bookU','use'),["books"=>Book::paginate(5)]);
     }
 public function adminbooking(Request $request){
+    if (!Auth::user()){
+        return redirect("admin/login");
+    }
     $request->validate([
         "name"=>"required",
         "nic"=>"required|unique:books,nic",
         "email"=>"required|unique:books,email",
         "nop"=>"required",
-        "trip"=>"required",
         "package"=>"required",
         "phone"=>"required|gte:14",
+        'splace'=>"required",
         "date"=>"required",
-        "hour"=>"required",
-        "dp"=>"required",
-        "minute"=>"required"
-
-    ]);
+        'rb'=>"required"
+        ]);
 
 
     $book=new Book();
@@ -245,13 +272,12 @@ public function adminbooking(Request $request){
     $book->email=$request->email;
     $book->nop=$request->nop;
     $book->date=$request->date;
-    $book->hour=$request->hour;
-    $book->minute=$request->minute;
-    $book->am_or_pm=$request->dp;
-    $book->trip=$request->trip;
+    $book->location=$request->splace;
     $book->package=$request->package;
     $book->phone=$request->phone;
+    $book->gender=$request->rb;
     $book->admins_id=Auth::user()->id;
+    $book->admins_name=Auth::user()->name;
     $book->save();
     $aut=Auth::user()->id;
     $users=User::findorfail($aut);
@@ -260,6 +286,9 @@ public function adminbooking(Request $request){
 
 }
 public function forAdminformat(){
+    if (!Auth::user()){
+        return redirect("admin/login");
+    }
     $aut=Auth::user()->id;
     $users=User::findorfail($aut);
     $use=$users->type;
@@ -282,6 +311,7 @@ public function adminProfile(){
         return view("admin/adminprofile");
 }
 public function staffAccEdit(Request $request,$id){
+
        $user=User::findorfail($id);
 
         $aut=Auth::user()->id;

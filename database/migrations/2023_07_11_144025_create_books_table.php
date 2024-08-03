@@ -17,13 +17,11 @@ return new class extends Migration
             $table->String("nic",20);
             $table->String("email");
             $table->integer("nop");
-            $table->String("trip");
+            $table->string("location",255);
             $table->String("package");
             $table->String("phone",14);
             $table->date("date");
-            $table->String("hour");
-            $table->string("minute");
-            $table->string("am_or_pm");
+            $table->string("gender",15);
             $table->string('isclear')->default('0');
             $table->foreignId('users_id')->default('0');
             $table->foreignId('admins_id')->default('0');

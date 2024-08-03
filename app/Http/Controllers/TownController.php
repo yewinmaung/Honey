@@ -111,14 +111,19 @@ class TownController extends Controller
 
         $hotel->update();
 
-      return redirect("admin/addtown");
+      return redirect("admin/addtown")->withSuccess("Successful");
     }
    public function gust(){
-        $hotels=Hotel::all();
-        $rooms=Room::all();
-        return view("admin/hotel",['hotels'=>Hotel::paginate(2)],['rooms'=>Room::paginate(2)]);
+
+
+        return view("admin/hotel",['hotels'=>Hotel::paginate(10)]);
    }
    public function gustInfo(\Illuminate\Http\Request $request){
+        $request->validate([
+            'img'=>"required",
+            'hotel'=>"required",
+            'loc'=>"required",
+        ]);
        $hotel=new Hotel();
        if ($image = $request->file('img'))
        {
@@ -133,6 +138,10 @@ class TownController extends Controller
        return redirect()->back();
    }
    public function room(\Illuminate\Http\Request $request){
+        $request->validate([
+            "img"=>"required",
+            'room'=>"required",
+        ]);
         $room=new Room();
        if ($image = $request->file('img'))
        {
@@ -155,9 +164,19 @@ class TownController extends Controller
       $dtown->delete();
        return redirect()->back();
     }
+    public function gustroom(){
+        $rooms=Room::all();
+        $hotels=Hotel::all();
+        return view("admin/room",["rooms"=>Room::paginate(5)]);
+    }
     public function rdel($id){
         $rdel=Room::findorfail($id);
         $rdel->delete();
+        return redirect("admin/room");
+    }
+    public function hotdel($id){
+        $hotdel=Hotel::findorfail($id);
+        $hotdel->delete();
         return redirect("admin/gust");
     }
 }
