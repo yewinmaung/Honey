@@ -152,7 +152,7 @@ class TownController extends Controller
        }
         $room->name=$request->room;
         $room->save();
-       return redirect("admin/gust");
+       return redirect()->route("gust-room");
    }
     /**
      * Remove the specified resource from storage.

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('cname');
             $table->string('cemail');
+            $table->integer("userid");
             $table->string("type")->default(0);
             $table->string('cmessage')->nullable();
             $table->string("title")->nullable();

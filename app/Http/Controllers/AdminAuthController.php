@@ -33,22 +33,16 @@ class AdminAuthController extends Controller
            $users= \Illuminate\Foundation\Auth\User::findorfail($aut);
 
            $use=$users->type;
-           if ($use){
-               if ($use=='1'){
+
+               if ($use==1){
                    return redirect()->route("dashboard",compact("request"))->withSuccess("Sigin");
                }
-               elseif ($use='2'){
-                   return redirect()->route("book-user",compact("request"))->withSuccess("Sigin");
+               else{
+                   return redirect()->route("admin-login")->withSuccess("Your not Admin");
                }
-               elseif ($use=='3'){
-                   return redirect()->route("book-user",compact("request"))->withSuccess("Sigin");
 
-               }
-           }
-           else
-           {
-               return redirect()->route('admin-login')->withSuccess("Your account is invalid");
-           }
+
+
                }
        else {
                return redirect()->route('admin-login')->withSuccess("Your account is invalid");

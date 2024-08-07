@@ -86,7 +86,7 @@
                                            <img src="/images/{{$hotel->img}}" width="50px" class="pb-2">
                                        </td>
                                        <td>{{$hotel->name}}</td>
-                                       <td>{{$hotel->location}}</td>
+                                       <td>{{\Illuminate\Support\Str::limit($hotel->location,30)}}</td>
                                        <td class="d-flex">
                                            <form action="{{route("hot",$hotel->id)}}" method="post" class="form-inline mx-1">
                                                @method('delete')
