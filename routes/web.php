@@ -88,6 +88,8 @@ Route::post("adim/postupdate",[\App\Http\Controllers\BookController::class,"pupd
 Route::get('admin/signout',[\App\Http\Controllers\AdminAuthController::class,'signout'])->name('admin-logout');
 
 //end Authentication
+
+Route::get("user/pagoda/detail/{id}",[\App\Http\Controllers\PagodaController::class,"show"])->name("pagodadetail");
 Route::post("user/booking",[\App\Http\Controllers\BookController::class,"store"])->name("user.store");
 Route::get("user/booknow/{id}",[\App\Http\Controllers\BookController::class,"create"])->name("user.booknow");
 Route::get("user/booking/confirm",[\App\Http\Controllers\BookController::class,"show"])->name("user.ticket");

@@ -49,19 +49,33 @@ class BookController extends Controller
         if (!Auth::user()){
             return redirect()->route("login");
         }
+
+        $check=DB::table("books")->where("isclear",0)->first();
+        if ($check){
+            $request->validate([
+                "name"=>"required",
+                "nic"=>"required|unique:books,nic",
+                "email"=>"required|unique:books,email",
+                "nop"=>"required",
+                "splace"=>"required",
+                "package"=>"required",
+                "phone"=>"required|gte:14",
+                "date"=>"required",
+                "rb"=>"required"
+            ]);
+
+        }
         $request->validate([
             "name"=>"required",
-            "nic"=>"required|unique:books,nic",
-            "email"=>"required|unique:books,email",
+            "nic"=>"required",
+            "email"=>"required",
             "nop"=>"required",
-
             "splace"=>"required",
             "package"=>"required",
             "phone"=>"required|gte:14",
             "date"=>"required",
             "rb"=>"required"
         ]);
-
 
         $book=new Book();
         $book->name=$request->name;

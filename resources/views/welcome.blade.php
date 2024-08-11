@@ -124,13 +124,43 @@
 
 
 <!-- end header -->
-<section class="container-fluid home bg-info position-relative">
+<section class="container-fluid position-relative">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="{{asset("data/images/bago.jpg")}}" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{{asset("data/images/pagodas/m2.jpg")}}" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{{asset("data/images/palace/p1.jpg")}}" alt="Third slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
     <div class="row">
-        <video src="{{asset("data/vedio/bg2.mp4")}}" autoplay muted loop class="w-100 h-100"></video>
+
+
+        {{--        <video src="{{asset("data/vedio/bg2.mp4")}}" autoplay muted loop class="w-100 h-100"></video>--}}
 
         @guest
 
-           @else
+        @else
             <div class="or-form">
                 <form method="post" action="{{route("user.store")}}" class="form-group border p-3 form-bg d-md-block d-none">
                     <h3 style="color:gold;background-color: #6b4701;" class="text-center d-flex justify-content-center mb-3 p-2 custom-adv">Start Your Trip With Us</h3>
@@ -230,7 +260,7 @@
                     </div>
                 </form>
             </div>
-            @endguest
+        @endguest
 
     </div>
 
@@ -241,7 +271,7 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="titlepage">
-                    <h2 style="color:#6b4701;">About  our travel agency</h2>
+                    <h2 style="color:#6b4701;">Bago History Abstract</h2>
                     <span> fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span>
                 </div>
             </div>
@@ -252,9 +282,11 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div class="about-box">
-                        <p> <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure thereThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there</span></p>
+                        <p> <span>
+                                       Bago is a region in Myanmar located close to Yangon region. Bago City, formerly known as Hanthawaddy is the capital of Bago region. it is located 80 kilometres north-east of Yangon. It is a popular trip destination for tourists visiting Yangon due to proximity. Bago offers a perfect milieu of nature and culture to tourists. It is renowned for handicrafts as well as a vast wildlife sanctuary. It has a population of 220,000.  Being an ancient capital of Mon Kingdom in 15th century, you can enjoy the Bago sightseeing including ancient Buddha Images. Most sightseeing is Shwethalyaung Reclining Buddha (55 metres long), Shwemawdaw Pagoda, and 28 meter high huge Buddha Image of Kyaikpun Pagoda with its four huge Buddha Images facing the cardinal points and the one interest place is Kanbawzathardi Palace.
+                            </span></p>
                         <div class="palne-img-area">
-                            <img src="{{asset("data/images/plane-img.png")}}" alt="images">
+                            <img src="{{asset("data/images/bago.jpg")}}" alt="images">
                         </div>
                     </div>
                 </div>
@@ -263,8 +295,7 @@
 
     </div>
 </div>
-<!-- end about -->
-<!-- traveling -->
+
 <div id="travel" class="traveling">
     <div class="container">
         <div class="row">
@@ -298,16 +329,18 @@
         </div>
     </div>
 </div>
-<!-- end traveling -->
 
-<!--Tours -->
+
+
 <div class="Tours">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="titlepage">
-                    <h2>The Best Tours</h2>
-                    <span>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span>
+                    <h2>Short Trip In  Moe Yun Gyi Wetland</h2>
+                    <span>
+                        Moe Yun Gyi Wetland Resort is a unique and serene destination located about 113 kilometers from Bago City, Myanmar. It’s a popular spot for nature lovers and bird watchers, offering a peaceful retreat in a natural wetland environment.
+                    </span>
                 </div>
             </div>
         </div>
@@ -316,24 +349,32 @@
                 <div class="col-md-12">
                     <div class="owl-carousel owl-theme">
                         <div class="item">
-                            <img class="img-responsive" src="{{asset("data/images/trip/dawei.jpg")}}" alt="#" />
-                            <h3>Dawei</h3>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                            <img class="img-responsive" src="{{asset("data/images/moeyanresort.jpg")}}" alt="#" />
+                            <h3>Moe Yun Gyi Wetland Resort</h3>
+                            <p>
+
+                            </p>
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="{{asset("data/images/trip/bagan.jpg")}}" alt="#" />
-                            <h3>Bagan</h3>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                            <img class="img-responsive" src="{{asset("data/images/myr2.jpg")}}" alt="#" />
+                            <h3>Moe Yun Gyi Wetland Resort</h3>
+                            <p>
+
+                            </p>
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="{{asset("data/images/trip/ngapali.jpg")}}" alt="#" />
-                            <h3>NgaPali</h3>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                            <img class="img-responsive" src="{{asset("data/images/myr3.jpg")}}" alt="#" />
+                            <h3>Moe Yun Gyi Wetland Resort</h3>
+                            <p>
+
+                            </p>
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="{{asset("data/images/trip/mkn.jpg")}}" alt="#" />
-                            <h3>MyitKyiNa</h3>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                            <img class="img-responsive" src="{{asset("data/images/myr4.jpg")}}" alt="#" />
+                            <h3>Moe Yun Gyi Wetland Resort</h3>
+                            <p>
+
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -341,9 +382,9 @@
         </section>
     </div>
 </div>
-<!-- end Tours -->
 
-<!-- our blog -->
+
+
 <div id="blog" class="blog">
     <div class="container">
         <div class="row">
@@ -386,7 +427,7 @@
     </div>
 </div>
 <!-- end our blog -->
-<!-- footer -->
+
 <footer>
     <div id="contact" class="footer">
         <div class="container">
@@ -477,6 +518,7 @@
         </div>
     </div>
 </footer>
+
 <!-- end footer -->
 <!-- Javascript files-->
 <script src="{{asset("data/js/jquery.min.js")}}"></script>

@@ -253,17 +253,31 @@ public function adminbooking(Request $request){
     if (!Auth::user()){
         return redirect("admin/login");
     }
+    $check=DB::table("books")->where("isclear",1)->first();
+    if(!$check){
+        $request->validate([
+            "name"=>"required",
+            "nic"=>"required|unique:books,nic",
+            "email"=>"required|unique:books,email",
+            "nop"=>"required",
+            "package"=>"required",
+            "phone"=>"required|gte:14",
+            'splace'=>"required",
+            "date"=>"required",
+            'rb'=>"required"
+        ]);
+    }
     $request->validate([
         "name"=>"required",
-        "nic"=>"required|unique:books,nic",
-        "email"=>"required|unique:books,email",
+        "nic"=>"required",
+        "email"=>"required",
         "nop"=>"required",
         "package"=>"required",
         "phone"=>"required|gte:14",
         'splace'=>"required",
         "date"=>"required",
         'rb'=>"required"
-        ]);
+    ]);
 
 
     $book=new Book();

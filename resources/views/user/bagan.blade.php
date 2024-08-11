@@ -13,79 +13,74 @@ Interesting Places
          <div id="about" class="">
              <div class="container">
                  <div class="row">
-                     <div class="col-md-12 ">
+                     <div class="col-md-12">
                          <div class="titlepage">
-                             <h2 style="color:#6b4701;">Pagoda</h2>
-                             <div class="row">
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 100%;">
-                                         <img src="{{asset("data/images/honey/smd.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                             <h5 class="card-title">Shwe Maw Daw Pagoda</h5>
-                                             <p class="card-text"></p>
-                                             <a href="http://bagoshwemawdaw.com.mm/" class="d-flex justify-content-end">More</a>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 100%;">
-                                         <img src="{{asset("data/images/honey/download.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                             <h5 class="card-title">Shwe Thar Lyaung Pagoda</h5>
-                                             <p class="card-text"></p>
-                                             <a href="https://www.google.com/maps/place/Shwe/@20.7644475,97.0933666,17z/data=!3m1!4b1!4m6!3m5!1s0x30ce7d00141659ad:0xbe294d31956605d4!8m2!3d20.7644475!4d97.0959415!16s%2Fg%2F11w25h086r?entry=ttu" class="d-flex justify-content-end">More</a>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 100%;">
-                                         <img src="{{asset("data/images/honey/images.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                             <h5 class="card-title">Kyaikpun Paya Pagoda</h5>
-                                             <p class="card-text">
-                                                 Founder - King Migadippa <br>
-                                                 Location - Bago City
-                                             </p>
-                                             <a href="http://bagoshwemawdaw.com.mm/" class="d-flex justify-content-end">More</a>
-                                         </div>
-                                     </div>
-                                 </div>
+                             <h2>Famous Pagodas</h2>
+                             <span>
+                                 Bago City, Myanmar, is known for its rich religious heritage, with many pagodas and temples that are significant both spiritually and historically.
+                        </span>
+                         </div>
+                         <div class="owl-carousel owl-theme">
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/shwe1.jpg")}}" alt="#" />
+                                 <h3>Shwemawdaw Pagoda</h3>
+                                 <p>
+                                     <a href="{{route("pagodadetail",1)}}" class="">More</a>
+                                 </p>
                              </div>
-
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/shwe2.jpg")}}" alt="#" />
+                                 <h3>Kyaik Pun Pagoda</h3>
+                                 <p>
+                                     <a href="{{route("pagodadetail",2)}}" class="">More</a>
+                                 </p>
                              </div>
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/shwe3.jpg")}}" alt="#" />
+                                 <h3>Shwethalyaung Buddha</h3>
+                                 <p>
+                                     <a href="{{route("pagodadetail",3)}}" class="">More</a>
+                                 </p>
+                             </div>
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/shwe4.jpg")}}" alt="#" />
+                                 <h3>Mahazedi Pagoda</h3>
+                                 <p>
+                                     <a href="{{route("pagodadetail",4)}}" class="">More</a>
+                                 </p>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-md-12">
                          <div class="titlepage">
-                             <h2 style="color:#6b4701;">Culture & Art</h2>
-                             <div class="row slider">
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 100%;">
-                                         <img src="{{asset("data/images/honey/palace1.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                             <h5 class="card-title">Palace</h5>
-                                             <p class="card-text"></p>
-                                            </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 100%;">
-                                         <img src="{{asset("data/images/honey/p4.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                             <h5 class="card-title">Museum</h5>
-                                             <p class="card-text"></p>
-                                          </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 100%;">
-                                         <img src="{{asset("data/images/honey/p3.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                             <h5 class="card-title">Palace</h5>
+                             <h2>Kanbawzathadi Palace</h2>
 
-                                          </div>
-                                     </div>
-                                 </div>
+                         </div>
+                         <div class="owl-carousel owl-theme">
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/palace/p1.jpg")}}" alt="#" />
+                              </div>
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/palace/p2.jpg")}}" alt="#" />
                              </div>
-                            </div>
-
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/palace/p3.jpg")}}" alt="#" />
+                             </div>
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/palace/p4.jpg")}}" alt="#" />
+                             </div>
+                         </div>
+                         <span class="pt-2">
+                               Kanbawzathadi Palace is a historic site in Bago, Myanmar. It was originally built in the 16th century by King Bayinnaung, a prominent monarch of the Hanthawaddy Kingdom. The palace was known for its grandeur and intricate architectural style, showcasing the art and culture of that era. The palace complex includes several important buildings and features, such as the throne hall and living quarters, all designed with detailed wooden carvings and traditional Burmese craftsmanship. The site offers a glimpse into the opulent lifestyle of the royal court and the historical significance of the Hanthawaddy Kingdom.
+                Today, the Kanbawzathadi Palace is a popular tourist attraction and a significant cultural heritage site, with efforts ongoing to preserve and restore its historical elements.
+For visiting Kanbawzathadi Palace , fees : 1 person – 2000 ks
+</span>
+                     </div>
+                 </div>
+                 <div class="row mt-3">
+                     <div class="col-md-12">
                          <div class="titlepage">
                              <h2 style="color:#6b4701;">Restaurants</h2>
                              <div class="row">
@@ -96,7 +91,7 @@ Interesting Places
                                          <div class="card-body">
                                              <h5 class="card-title">{{$r->name}}</h5>
                                              <p class="card-text">{{$r->dec}}</p>
-                                             <a href="{{$r->loc}}" class="d-flex justify-content-end">More</a>
+                                             <a href="{{$r->loc}}" class="d-flex justify-content-end">Location</a>
                                          </div>
                                      </div>
                                  </div>
@@ -105,55 +100,31 @@ Interesting Places
 
 
                          </div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-md-12">
                          <div class="titlepage">
-                             <h2 style="color:#6b4701;">Local Products</h2>
-                             <div class="row">
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 80%; height: 50%;">
-                                         <img src="{{asset("data/images/honey/l1.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                           </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 80%; height: 50%;">
-                                         <img src="{{asset("data/images/honey/l2.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                             </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 80%; height: 50%;">
-                                         <img src="{{asset("data/images/honey/l3.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                            </div>
-                                     </div>
-                                 </div>
+                             <h2>Arts and Crafts</h2>
 
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 80%; height: 50%;">
-                                         <img src="{{asset("data/images/honey/l4.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                            </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 80%; height: 50%;">
-                                         <img src="{{asset("data/images/honey/l6.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                              </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4 p-0">
-                                     <div class="card" style="width: 80%; height: 50%;">
-                                         <img src="{{asset("data/images/honey/l5.jpg")}}" class="card-img-top" alt="...">
-                                         <div class="card-body">
-                                            </div>
-                                     </div>
-                                 </div>
+                         </div>
+                         <div class="owl-carousel owl-theme">
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/art/a1.jpg")}}" alt="#" />
 
                              </div>
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/art/a2.jpg")}}" alt="#" />
 
+                             </div>
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/art/a3.jpg")}}" alt="#" />
+
+                             </div>
+                             <div class="item">
+                                 <img class="img-responsive" src="{{asset("data/images/art/a4.jpg")}}" alt="#" />
+
+                             </div>
                          </div>
                      </div>
                  </div>
@@ -162,4 +133,25 @@ Interesting Places
          </div>
 
 
+@endsection
+@section("customscript")
+    $(document).ready(function() {
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+    margin: 10,
+    nav: true,
+    loop: true,
+    responsive: {
+    0: {
+    items: 1
+    },
+    600: {
+    items: 2
+    },
+    1000: {
+    items: 3
+    }
+    }
+    })
+    })
 @endsection

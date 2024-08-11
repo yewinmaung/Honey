@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -66,13 +67,28 @@ class PaymentController extends Controller
      */
     public function update(Request $request,$id)
     {
+
         if (!Auth::user()){
             return redirect("admin/login");
         }
+        $check=DB::table("books")->where("isclear",1)->first();
+    if(!$check){
+    $request->validate([
+        "name"=>"required",
+        "nic"=>"required|unique:books,nic,$id",
+        "email"=>"required|unique:books,email,$id",
+        "nop"=>"required",
+        "splace"=>"required",
+        "package"=>"required",
+        "phone"=>"required|gte:14",
+        "date"=>"required",
+        "paym"=>"required",
+        ]);
+
+}
         $request->validate([
             "name"=>"required",
-            "nic"=>"required|unique:books,nic,$id",
-            "email"=>"required|unique:books,email,$id",
+
             "nop"=>"required",
             "splace"=>"required",
             "package"=>"required",
@@ -81,6 +97,7 @@ class PaymentController extends Controller
             "paym"=>"required",
 
         ]);
+
 
         $book=Book::findorfail($id);
         $book->name=$request->name;
