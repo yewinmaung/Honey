@@ -44,7 +44,7 @@ class MessageController extends Controller
         $complain->cemail = $request->cemail;
         $complain->cmessage = $request->cmessage;
         $complain->title = $request->title;
-        $complain->userid=Auth::user()->id;
+
         $complain->save();
         return redirect()->back()->withSuccess("Send Message");
 
